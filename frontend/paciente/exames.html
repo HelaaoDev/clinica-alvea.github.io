@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meus Exames — Clínica Alvea</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/auth.css">
+<link rel="stylesheet" href="../css/app.css">
+<link rel="stylesheet" href="../css/agendamentos.css">
+<link rel="stylesheet" href="../css/exames.css">
+</head>
+<body class="app-body">
+
+<header class="app-header">
+  <div class="container">
+    <a href="../index.html" class="logo">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" stroke="#0F6E8C" stroke-width="2"/>
+        <path d="M6 21h5l2.5-7 4 14 3-9 2 3h11.5" stroke="#3FA796" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      Clínica Alvea
+    </a>
+
+    <div class="app-user">
+      <a href="perfil.html" class="app-user-link" title="Editar perfil">
+        <div class="avatar" id="userAvatar">--</div>
+        <div>
+          <div class="name" id="userName">Carregando...</div>
+          <div class="role">Paciente</div>
+        </div>
+      </a>
+      <button class="app-logout" id="logoutBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        Sair
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="app-main">
+  <div class="container">
+
+    <div class="agendar-header-row">
+      <a href="home.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Voltar ao início
+      </a>
+    </div>
+
+    <div class="page-header-row">
+      <div class="page-title">
+        <h1>Meus Exames</h1>
+        <p>Acompanhe o status e os resultados dos seus exames.</p>
+      </div>
+    </div>
+
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="todos">Todos</button>
+      <button class="filter-tab" data-filter="aguardando_resultado">Aguardando resultado</button>
+      <button class="filter-tab" data-filter="concluido">Resultado disponível</button>
+    </div>
+
+    <div id="listaContainer">
+      <p style="color:var(--alvea-text-muted); font-size:14px;">Carregando seus exames...</p>
+    </div>
+
+  </div>
+</main>
+
+<!-- Modal de detalhe do exame -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="exam-modal-box">
+    <div class="exam-modal-header">
+      <div>
+        <div class="exam-modal-title" id="modalTitulo">Exame</div>
+        <div class="exam-modal-date" id="modalData"></div>
+      </div>
+      <button class="exam-modal-close" id="modalCloseBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div id="modalConteudo"></div>
+  </div>
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+  const sessao = alveaRequireAuth('login.html');
+  let TODOS_EXAMES = [];
+  let FILTRO_ATUAL = 'todos';
+
+  if (sessao) {
+    const { usuario } = sessao;
+    const iniciais = usuario.nome.split(' ').filter(Boolean).slice(0, 2).map(p => p[0].toUpperCase()).join('');
+    document.getElementById('userName').textContent = usuario.nome;
+    alveaRenderAvatar('userAvatar', usuario);
+  }
+
+  document.getElementById('logoutBtn').addEventListener('click', () => alveaLogout('login.html'));
+
+  function formatarData(dataStr) {
+    // dataRealizacao vem como "AAAA-MM-DD"
+    const [ano, mes, dia] = dataStr.split('-');
+    const data = new Date(Number(ano), Number(mes) - 1, Number(dia));
+    return data.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+  }
+
+  const LABELS_STATUS = {
+    aguardando_resultado: 'Aguardando resultado',
+    concluido: 'Resultado disponível',
+  };
+
+  const ICONE_FRASCO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6L4 20a1 1 0 001 1h14a1 1 0 001-1L15 8V2M9 2h6M9 14h6"/></svg>';
+
+  function renderizarLista() {
+    const container = document.getElementById('listaContainer');
+
+    const filtrados = FILTRO_ATUAL === 'todos'
+      ? TODOS_EXAMES
+      : TODOS_EXAMES.filter((e) => e.status === FILTRO_ATUAL);
+
+    if (!filtrados.length) {
+      container.innerHTML = `
+        <div class="empty-exams">
+          <div class="icon">${ICONE_FRASCO}</div>
+          <h3>${TODOS_EXAMES.length ? 'Nenhum exame nesse filtro' : 'Você ainda não tem exames registrados'}</h3>
+          <p>${TODOS_EXAMES.length ? 'Tente outro filtro acima.' : 'Assim que a clínica registrar um exame, ele aparece aqui.'}</p>
+        </div>`;
+      return;
+    }
+
+    container.innerHTML = `<div class="exams-list">${filtrados.map((exame) => `
+      <div class="exam-card status-${exame.status}" data-id="${exame.id}">
+        <div class="exam-icon-block">${ICONE_FRASCO}</div>
+        <div class="exam-info">
+          <div class="exam-title">${exame.tipoExame}</div>
+          <div class="exam-date">Realizado em ${formatarData(exame.dataRealizacao)}</div>
+        </div>
+        <div class="exam-actions">
+          <span class="exam-status-badge ${exame.status}">${LABELS_STATUS[exame.status] || exame.status}</span>
+          <svg class="exam-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </div>
+    `).join('')}</div>`;
+
+    container.querySelectorAll('.exam-card').forEach((card) => {
+      card.addEventListener('click', () => abrirDetalheExame(card.dataset.id));
+    });
+  }
+
+  /* ---------- Filtros ---------- */
+
+  document.querySelectorAll('.filter-tab').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.filter-tab').forEach((t) => t.classList.remove('active'));
+      tab.classList.add('active');
+      FILTRO_ATUAL = tab.dataset.filter;
+      renderizarLista();
+    });
+  });
+
+  /* ---------- Modal de detalhe ---------- */
+
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+  function fecharModal() {
+    modalOverlay.classList.remove('show');
+  }
+
+  modalCloseBtn.addEventListener('click', fecharModal);
+  modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) fecharModal(); });
+
+  async function abrirDetalheExame(id) {
+    document.getElementById('modalTitulo').textContent = 'Carregando...';
+    document.getElementById('modalData').textContent = '';
+    document.getElementById('modalConteudo').innerHTML = '';
+    modalOverlay.classList.add('show');
+
+    try {
+      const exame = await alveaApiRequest(`/exames/${id}`, {
+        headers: { Authorization: `Bearer ${sessao.token}` },
+      });
+
+      document.getElementById('modalTitulo').textContent = exame.tipoExame;
+      document.getElementById('modalData').textContent = `Realizado em ${formatarData(exame.dataRealizacao)}`;
+
+      const conteudo = document.getElementById('modalConteudo');
+
+      if (exame.status === 'concluido' && exame.resultado) {
+        conteudo.innerHTML = `
+          <div class="exam-modal-section">
+            <div class="label">Laudo</div>
+            <div class="exam-modal-laudo">${exame.resultado.laudoTexto}</div>
+          </div>
+          ${exame.resultado.arquivoUrl ? `
+            <a href="${alveaResolverUrlArquivo(exame.resultado.arquivoUrl)}" target="_blank" rel="noopener" class="btn btn-primary btn-block">
+              Baixar arquivo do exame
+            </a>` : ''}
+        `;
+      } else {
+        conteudo.innerHTML = `
+          <div class="exam-modal-waiting">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            <p>Este exame ainda está sendo processado pela clínica. Assim que o resultado for liberado, ele aparece automaticamente aqui.</p>
+          </div>`;
+      }
+    } catch (erro) {
+      document.getElementById('modalTitulo').textContent = 'Não foi possível carregar';
+      document.getElementById('modalConteudo').innerHTML = `<p style="color:var(--alvea-danger); font-size:14px;">${erro.message}</p>`;
+    }
+  }
+
+  /* ---------- Carregamento inicial ---------- */
+
+  async function carregarExames() {
+    try {
+      const dados = await alveaApiRequest('/exames/meus', {
+        headers: { Authorization: `Bearer ${sessao.token}` },
+      });
+
+      TODOS_EXAMES = dados.sort((a, b) => new Date(b.dataRealizacao) - new Date(a.dataRealizacao));
+      renderizarLista();
+    } catch (erro) {
+      document.getElementById('listaContainer').innerHTML = `
+        <div class="empty-exams">
+          <p>${erro.message}</p>
+        </div>`;
+    }
+  }
+
+  if (sessao) {
+    carregarExames();
+  }
+</script>
+</body>
+</html>

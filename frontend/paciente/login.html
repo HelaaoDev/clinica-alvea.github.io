@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<script>
+  (function () {
+    try {
+      var token = localStorage.getItem('alveatech_token');
+      var usuarioRaw = localStorage.getItem('alveatech_usuario');
+      if (token && usuarioRaw) {
+        var usuario = JSON.parse(usuarioRaw);
+        var destino = usuario.role === 'admin' ? '../admin/dashboard.html' : 'home.html';
+        window.location.replace(destino);
+      }
+    } catch (erro) {}
+  })();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrar — Clínica Alvea</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/auth.css">
+</head>
+<body class="auth-body">
+
+<div class="auth-wrapper">
+
+  <!-- Painel de marca -->
+  <div class="auth-brand auth-brand-login">
+    <div class="auth-brand-top">
+      <a href="../index.html" class="logo">
+        <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="19" stroke="#FFFFFF" stroke-width="2"/>
+          <path d="M6 21h5l2.5-7 4 14 3-9 2 3h11.5" stroke="#8FE0CE" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        Clínica Alvea
+      </a>
+
+      <a href="../index.html" class="auth-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Voltar ao início
+      </a>
+    </div>
+
+    <div class="auth-brand-content">
+      <span class="section-label auth-label">Bem-vindo de volta</span>
+      <h2>Sua saúde, organizada em um só lugar.</h2>
+      <p>Acesse sua conta para agendar consultas, acompanhar exames e gerenciar seus horários com a clínica.</p>
+    </div>
+
+    <div>
+      <div class="auth-brand-pulse" aria-hidden="true">
+        <svg viewBox="0 0 400 60"><path d="M0 30h90l14-22 20 44 14-30 10 14h22l14-18 16 32 14-20h176"/></svg>
+      </div>
+      <div class="auth-brand-foot">© 2026 Clínica Alvea — Tecnologia que respira cuidado.</div>
+    </div>
+  </div>
+
+  <!-- Painel de formulário -->
+  <div class="auth-form-panel">
+    <div class="auth-form-box">
+
+      <a href="../index.html" class="logo logo-mobile">
+        <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="19" stroke="#0F6E8C" stroke-width="2"/>
+          <path d="M6 21h5l2.5-7 4 14 3-9 2 3h11.5" stroke="#3FA796" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        Clínica Alvea
+      </a>
+
+      <h1>Entrar na sua conta</h1>
+      <p class="auth-subtitle">Informe seus dados para acessar a área do paciente.</p>
+
+      <div class="form-alert" id="formAlert">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+        <span id="formAlertText"></span>
+      </div>
+
+      <form id="loginForm" novalidate>
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" placeholder="voce@email.com" required autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label for="senha">Senha</label>
+          <div class="password-field">
+            <input type="password" id="senha" name="senha" placeholder="Sua senha" required autocomplete="current-password">
+            <button type="button" class="password-toggle" data-target="senha" aria-label="Mostrar senha">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block auth-submit" id="submitBtn">
+          <span class="btn-spinner"></span>
+          <span class="btn-label">Entrar</span>
+        </button>
+      </form>
+
+      <p class="auth-switch">Ainda não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
+    </div>
+  </div>
+
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+  document.querySelectorAll('.password-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const alvo = document.getElementById(btn.dataset.target);
+      const visivel = alvo.type === 'text';
+      alvo.type = visivel ? 'password' : 'text';
+      btn.setAttribute('aria-label', visivel ? 'Mostrar senha' : 'Ocultar senha');
+      btn.innerHTML = visivel
+        ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'
+        : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.94 10.94 0 0112 20c-7 0-11-8-11-8a20.3 20.3 0 015.06-6.06M9.9 4.24A10.4 10.4 0 0112 4c7 0 11 8 11 8a20.3 20.3 0 01-3.22 4.44M14.12 14.12a3 3 0 11-4.24-4.24"/><path d="M1 1l22 22"/></svg>';
+    });
+  });
+
+  const form = document.getElementById('loginForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const formAlert = document.getElementById('formAlert');
+  const formAlertText = document.getElementById('formAlertText');
+
+  function mostrarErro(mensagem) {
+    formAlert.classList.remove('success');
+    formAlert.classList.add('show');
+    formAlertText.textContent = mensagem;
+  }
+
+  function esconderAlerta() {
+    formAlert.classList.remove('show');
+  }
+
+  form.addEventListener('submit', async (evento) => {
+    evento.preventDefault();
+    esconderAlerta();
+
+    const email = document.getElementById('email').value.trim();
+    const senha = document.getElementById('senha').value;
+
+    if (!email || !senha) {
+      mostrarErro('Preencha e-mail e senha para continuar.');
+      return;
+    }
+
+    submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
+
+    try {
+      const resultado = await alveaApiRequest('/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({ email, senha }),
+      });
+
+      alveaSaveSession(resultado.usuario, resultado.token);
+      alveaRedirectByRole(resultado.usuario);
+    } catch (erro) {
+      mostrarErro(erro.message);
+      submitBtn.classList.remove('loading');
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>

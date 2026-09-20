@@ -1,0 +1,39 @@
+# ==========================================================================
+# Clínica Alvea — .gitignore raiz
+# ==========================================================================
+
+# Segredos e variáveis de ambiente — NUNCA versionar
+.env
+.env.local
+.env.*.local
+backend/.env
+
+# Dependências
+node_modules/
+**/node_modules/
+
+# Arquivos enviados por usuários (laudos, fotos de perfil)
+# Mantém a estrutura de pastas (.gitkeep) mas ignora o conteúdo real
+backend/uploads/exames/*
+!backend/uploads/exames/.gitkeep
+backend/uploads/perfis/*
+!backend/uploads/perfis/.gitkeep
+
+# Logs
+*.log
+npm-debug.log*
+logs/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores / IDEs
+.vscode/
+.idea/
+*.swp
+
+# Build/cache diversos
+*.tmp
+*.cache

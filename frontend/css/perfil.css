@@ -1,0 +1,231 @@
+/* ==========================================================================
+   Clínica Alvea — Perfil do paciente
+   ========================================================================== */
+
+.perfil-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* ---------- Card de foto ---------- */
+
+.perfil-foto-card {
+  background: var(--alvea-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.perfil-avatar-wrap {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 18px;
+}
+
+.perfil-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--alvea-blue-light);
+  color: var(--alvea-blue-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 38px;
+  overflow: hidden;
+}
+
+.perfil-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.perfil-avatar-edit {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--alvea-blue);
+  color: var(--alvea-white);
+  border: 3px solid var(--alvea-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.perfil-avatar-edit:hover { background: var(--alvea-blue-dark); }
+.perfil-avatar-edit svg { width: 16px; height: 16px; }
+.perfil-avatar-edit input[type="file"] { display: none; }
+
+.perfil-foto-card .perfil-nome { font-family: var(--font-heading); font-weight: 600; font-size: 16px; }
+.perfil-foto-card .perfil-role { font-size: 13px; color: var(--alvea-text-muted); margin-top: 3px; }
+
+.perfil-foto-hint {
+  font-size: 12px;
+  color: var(--alvea-text-muted);
+  margin-top: 14px;
+}
+
+.perfil-upload-status {
+  font-size: 12.5px;
+  margin-top: 10px;
+  min-height: 16px;
+}
+
+.perfil-upload-status.error { color: var(--alvea-danger); }
+.perfil-upload-status.success { color: var(--alvea-green-dark); }
+
+/* ---------- Cards de formulário ---------- */
+
+.perfil-section-card {
+  background: var(--alvea-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 28px 30px;
+  margin-bottom: 24px;
+}
+
+.perfil-section-card h2 {
+  font-size: 17px;
+  margin-bottom: 4px;
+}
+
+.perfil-section-card .section-sub {
+  font-size: 13.5px;
+  color: var(--alvea-text-muted);
+  margin-bottom: 24px;
+}
+
+.perfil-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.perfil-form-row .form-group { margin-bottom: 18px; }
+
+.perfil-section-card select {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid #E3E7EA;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--alvea-text);
+  background: var(--alvea-white);
+}
+
+.perfil-section-card select:focus {
+  outline: none;
+  border-color: var(--alvea-blue);
+  box-shadow: 0 0 0 3px var(--alvea-blue-light);
+}
+
+.perfil-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.perfil-actions .btn { min-width: 180px; }
+
+/* ---------- Familiares ---------- */
+
+.perfil-section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.perfil-section-header h2 { margin-bottom: 4px; }
+.perfil-section-header .section-sub { margin-bottom: 0; }
+.perfil-section-header .btn { flex-shrink: 0; white-space: nowrap; }
+
+.familiares-empty {
+  font-size: 14px;
+  color: var(--alvea-text-muted);
+}
+
+.familiares-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.familiares-list:not(:empty) { margin-bottom: 20px; }
+
+.familiar-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1.5px solid #E9ECEF;
+  border-radius: var(--radius-sm);
+}
+
+.familiar-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--alvea-green-light);
+  color: var(--alvea-green-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.familiar-info { flex: 1; min-width: 0; }
+.familiar-nome { font-family: var(--font-heading); font-weight: 600; font-size: 14.5px; }
+.familiar-meta { font-size: 12.5px; color: var(--alvea-text-muted); margin-top: 2px; }
+
+.familiar-item-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.familiar-item-actions button {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1.5px solid #E3E7EA;
+  background: var(--alvea-white);
+  color: var(--alvea-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.familiar-item-actions button:hover { border-color: var(--alvea-blue); color: var(--alvea-blue); }
+.familiar-item-actions .familiar-delete-btn:hover { border-color: var(--alvea-danger); color: var(--alvea-danger); }
+.familiar-item-actions svg { width: 16px; height: 16px; }
+
+.familiar-form {
+  border-top: 1px solid var(--alvea-bg-alt);
+  padding-top: 20px;
+}
+
+@media (max-width: 860px) {
+  .perfil-grid { grid-template-columns: 1fr; }
+  .perfil-form-row { grid-template-columns: 1fr; }
+  .perfil-section-header { flex-direction: column; }
+}

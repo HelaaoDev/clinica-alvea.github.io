@@ -1,0 +1,414 @@
+/* ==========================================================================
+   Alvea Tech — Área Administrativa
+   ========================================================================== */
+
+.admin-body {
+  background: var(--alvea-bg-alt);
+  min-height: 100vh;
+  display: flex;
+}
+
+/* ---------- Sidebar ---------- */
+
+.admin-sidebar {
+  width: 248px;
+  flex-shrink: 0;
+  background: var(--alvea-white);
+  border-right: 1px solid rgba(15,110,140,0.08);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+}
+
+.admin-sidebar .logo {
+  padding: 26px 24px;
+  border-bottom: 1px solid rgba(15,110,140,0.08);
+}
+
+.admin-nav {
+  flex: 1;
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--alvea-text-muted);
+  transition: all 0.15s ease;
+}
+
+.admin-nav-link svg { width: 19px; height: 19px; flex-shrink: 0; }
+
+.admin-nav-link:hover {
+  background: var(--alvea-bg-alt);
+  color: var(--alvea-text);
+}
+
+.admin-nav-link.active {
+  background: var(--alvea-blue-light);
+  color: var(--alvea-blue-dark);
+  font-weight: 600;
+}
+
+.admin-sidebar-foot {
+  padding: 14px;
+  border-top: 1px solid rgba(15,110,140,0.08);
+}
+
+.admin-user-mini {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+}
+
+.admin-user-mini .avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--alvea-blue-light);
+  color: var(--alvea-blue-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.admin-user-mini .name { font-family: var(--font-heading); font-weight: 600; font-size: 13.5px; }
+.admin-user-mini .role { font-size: 11.5px; color: var(--alvea-text-muted); }
+
+.admin-logout-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  margin-top: 4px;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--alvea-text-muted);
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+}
+
+.admin-logout-link:hover { background: var(--alvea-danger-light); color: var(--alvea-danger); }
+.admin-logout-link svg { width: 17px; height: 17px; }
+
+/* ---------- Conteúdo principal ---------- */
+
+.admin-content { flex: 1; min-width: 0; }
+
+.admin-main { padding: 40px 44px 80px; }
+
+.admin-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.admin-page-header h1 { font-size: clamp(22px, 2.4vw, 27px); }
+.admin-page-header p { color: var(--alvea-text-muted); margin-top: 6px; font-size: 14.5px; }
+
+/* ---------- Stat cards (dashboard) ---------- */
+
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 40px;
+}
+
+.admin-stat-card {
+  background: var(--alvea-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 22px 24px;
+}
+
+.stat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  background: var(--alvea-blue-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+
+.stat-icon svg { width: 20px; height: 20px; stroke: var(--alvea-blue); }
+
+.admin-stat-card .stat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  background: var(--alvea-blue-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.admin-stat-card .stat-icon svg { width: 20px; height: 20px; stroke: var(--alvea-blue); }
+.admin-stat-card .stat-value { font-family: var(--font-heading); font-weight: 700; font-size: 26px; color: var(--alvea-text); }
+.admin-stat-card .stat-label { font-size: 13px; color: var(--alvea-text-muted); margin-top: 4px; }
+
+.admin-quick-links {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.admin-quick-card {
+  background: var(--alvea-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 22px 24px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.admin-quick-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card-hover); }
+
+.admin-quick-card .stat-icon { background: var(--alvea-green-light); }
+.admin-quick-card .stat-icon svg { stroke: var(--alvea-green-dark); }
+.admin-quick-card h3 { font-size: 15px; margin-bottom: 6px; }
+.admin-quick-card p { font-size: 13px; color: var(--alvea-text-muted); }
+
+/* ---------- Tabela ---------- */
+
+.admin-table-card {
+  background: var(--alvea-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th {
+  text-align: left;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--alvea-text-muted);
+  padding: 16px 20px;
+  background: var(--alvea-bg-alt);
+  white-space: nowrap;
+}
+
+.admin-table td {
+  padding: 16px 20px;
+  font-size: 14px;
+  color: var(--alvea-text);
+  border-top: 1px solid var(--alvea-bg-alt);
+  vertical-align: middle;
+}
+
+.admin-table tr:hover td { background: var(--alvea-bg-alt); }
+
+.admin-table .cell-muted { color: var(--alvea-text-muted); font-size: 13px; }
+.admin-table .cell-strong { font-family: var(--font-heading); font-weight: 600; }
+
+.table-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid #E3E7EA;
+  background: var(--alvea-white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: var(--alvea-text-muted);
+}
+
+.icon-btn svg { width: 16px; height: 16px; }
+.icon-btn:hover { border-color: var(--alvea-blue); color: var(--alvea-blue); }
+.icon-btn.danger:hover { border-color: var(--alvea-danger); color: var(--alvea-danger); }
+
+.table-empty {
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--alvea-text-muted);
+  font-size: 14.5px;
+}
+
+/* ---------- Filtros ---------- */
+
+.admin-filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.admin-filters select,
+.admin-filters input {
+  padding: 10px 14px;
+  border: 1.5px solid #E3E7EA;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--alvea-text);
+  background: var(--alvea-white);
+}
+
+.admin-filters select:focus,
+.admin-filters input:focus {
+  outline: none;
+  border-color: var(--alvea-blue);
+}
+
+/* ---------- Modal genérico admin ---------- */
+
+.admin-modal-box {
+  background: var(--alvea-white);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  max-width: 460px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  animation: alvea-fade-in 0.25s ease;
+}
+
+.admin-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.admin-modal-header h3 { font-size: 18px; }
+
+.admin-modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--alvea-text-muted);
+  padding: 4px;
+}
+
+.admin-modal-close svg { width: 20px; height: 20px; }
+.admin-modal-close:hover { color: var(--alvea-text); }
+
+.admin-modal-footer {
+  display: flex;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.admin-modal-footer .btn {
+  flex: 1;
+  white-space: normal;
+  text-align: center;
+  padding: 12px 14px;
+}
+
+/* ---------- Lista de horários dinâmica (form profissional) ---------- */
+
+.horarios-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.horario-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.horario-row input { flex: 1; }
+
+.horario-remove {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid #E3E7EA;
+  background: var(--alvea-white);
+  color: var(--alvea-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.horario-remove:hover { border-color: var(--alvea-danger); color: var(--alvea-danger); }
+.horario-remove svg { width: 15px; height: 15px; }
+
+.add-horario-btn {
+  background: none;
+  border: 1.5px dashed #D6DBDF;
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--alvea-blue);
+  cursor: pointer;
+  width: 100%;
+}
+
+.add-horario-btn:hover { border-color: var(--alvea-blue); background: var(--alvea-blue-light); }
+
+@media (max-width: 1100px) {
+  .admin-stats-grid, .admin-quick-links { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .admin-body { flex-direction: column; }
+  .admin-sidebar {
+    width: 100%;
+    min-height: auto;
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+  }
+  .admin-sidebar .logo { border-bottom: none; padding: 16px; }
+  .admin-nav { flex-direction: row; padding: 8px; }
+  .admin-sidebar-foot { display: none; }
+  .admin-main { padding: 28px 20px 60px; }
+}
+
+@media (max-width: 560px) {
+  .admin-stats-grid, .admin-quick-links { grid-template-columns: 1fr; }
+  .admin-table-card { overflow-x: auto; }
+  .admin-table { min-width: 640px; }
+}

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plano Corporativo — Fale com a Clínica Alvea</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/auth.css">
+<link rel="stylesheet" href="css/contato-empresa.css">
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="header">
+  <div class="container">
+    <a href="index.html" class="logo">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" stroke="#0F6E8C" stroke-width="2"/>
+        <path d="M6 21h5l2.5-7 4 14 3-9 2 3h11.5" stroke="#3FA796" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      Clínica Alvea
+    </a>
+
+    <nav class="nav" id="mainNav">
+      <a href="index.html#home">Início</a>
+      <a href="index.html#servicos">Serviços</a>
+      <a href="index.html#planos">Planos</a>
+      <a href="index.html#sobre">Relatos</a>
+      <a href="index.html#faq">Dúvidas</a>
+      <a href="index.html#contato">Contato</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="paciente/login.html" class="btn btn-secondary">Entrar</a>
+      <a href="paciente/agendar.html" class="btn btn-primary">Agendar Consulta</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== CONTEÚDO ===================== -->
+<section class="corp-hero">
+  <div class="container">
+    <a href="index.html#planos" class="corp-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Voltar aos planos
+    </a>
+
+    <div class="corp-grid">
+
+      <!-- Coluna de informações -->
+      <div class="corp-info">
+        <span class="eyebrow">Plano Corporativo</span>
+        <h1>Cuidado de saúde para toda a sua equipe</h1>
+        <p>Preencha o formulário ao lado com os dados da sua empresa. Nossa equipe entra em contato para montar uma proposta sob medida para o número de colaboradores e as necessidades do seu time.</p>
+
+        <ul class="corp-benefits">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Agendamento facilitado para colaboradores
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Exames periódicos programados
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Relatório de saúde ocupacional
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Condições especiais conforme o porte da empresa
+          </li>
+        </ul>
+
+        <div class="corp-contact-box">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.68 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="label">Fale com nosso consultor</div>
+            <div class="value">(11) 4000-1234</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna do formulário -->
+      <div class="corp-form-card">
+
+        <div id="formularioWrap">
+          <h2>Solicitar contato</h2>
+          <p class="form-sub">Preencha os dados abaixo — respondemos em até 1 dia útil.</p>
+
+          <div class="form-alert" id="formAlert">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+            <span id="formAlertText"></span>
+          </div>
+
+          <form id="corpForm" novalidate>
+            <!-- Honeypot anti-bot: invisível para humanos -->
+            <div style="position:absolute; left:-9999px; top:-9999px;" aria-hidden="true">
+              <label for="website">Não preencha este campo</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+              <label for="nomeEmpresa">Nome da empresa</label>
+              <input type="text" id="nomeEmpresa" placeholder="Razão social ou nome fantasia" required>
+            </div>
+
+            <div class="corp-form-row">
+              <div class="form-group">
+                <label for="cnpj">CNPJ <span style="font-weight:400; color:var(--alvea-text-muted);">(opcional)</span></label>
+                <input type="text" id="cnpj" placeholder="00.000.000/0000-00">
+              </div>
+              <div class="form-group">
+                <label for="numeroColaboradores">Número de colaboradores</label>
+                <select id="numeroColaboradores">
+                  <option value="">Selecione</option>
+                  <option value="1-10">1 a 10</option>
+                  <option value="11-50">11 a 50</option>
+                  <option value="51-200">51 a 200</option>
+                  <option value="201-500">201 a 500</option>
+                  <option value="500+">Mais de 500</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="corp-form-row">
+              <div class="form-group">
+                <label for="responsavel">Nome do responsável</label>
+                <input type="text" id="responsavel" placeholder="Quem vamos contatar" required>
+              </div>
+              <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="text" id="telefone" placeholder="(00) 00000-0000" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">E-mail corporativo</label>
+              <input type="email" id="email" placeholder="contato@suaempresa.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="mensagem">Mensagem <span style="font-weight:400; color:var(--alvea-text-muted);">(opcional)</span></label>
+              <textarea id="mensagem" rows="4" placeholder="Conte um pouco sobre o que sua empresa precisa..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block auth-submit" id="submitBtn">
+              <span class="btn-spinner"></span>
+              <span class="btn-label">Enviar solicitação</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Estado de sucesso -->
+        <div id="sucessoWrap" class="corp-success" style="display:none;">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <h2>Solicitação enviada!</h2>
+          <p>Recebemos os dados da sua empresa. Nossa equipe entrará em contato em breve pelo e-mail ou telefone informado.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html#home" class="logo">
+          <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="19" stroke="#FFFFFF" stroke-width="2"/>
+            <path d="M6 21h5l2.5-7 4 14 3-9 2 3h11.5" stroke="#8FE0CE" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          Clínica Alvea
+        </a>
+        <p>Tecnologia que respira cuidado. Soluções digitais para uma saúde mais acessível.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Horário de atendimento</h4>
+        <div class="footer-col-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          <span>Seg – Sex: 7h às 19h<br>Sáb: 8h às 13h</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <div class="footer-col-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.68 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0122 16.92z"/></svg>
+          <span>(11) 4000-1234</span>
+        </div>
+        <div class="footer-col-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4V4z"/><path d="M4 6l8 7 8-7"/></svg>
+          <span>contato@clinicaalvea.com.br</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Endereço</h4>
+        <div class="footer-col-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Av. das Nações, 1200<br>São Paulo, SP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Clínica Alvea. Todos os direitos reservados.</span>
+      <span>Projeto acadêmico — Sistema de Agendamento para Clínica de Saúde</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const ALVEA_CORP_API_BASE_URL = window.ALVEA_API_BASE_URL;
+
+  const formAlert = document.getElementById('formAlert');
+  const formAlertText = document.getElementById('formAlertText');
+  const submitBtn = document.getElementById('submitBtn');
+
+  function mostrarErro(mensagem) {
+    formAlertText.textContent = mensagem;
+    formAlert.classList.add('show');
+  }
+  function esconderErro() {
+    formAlert.classList.remove('show');
+  }
+
+  document.getElementById('corpForm').addEventListener('submit', async (evento) => {
+    evento.preventDefault();
+    esconderErro();
+
+    const dados = {
+      nomeEmpresa: document.getElementById('nomeEmpresa').value.trim(),
+      cnpj: document.getElementById('cnpj').value.trim(),
+      responsavel: document.getElementById('responsavel').value.trim(),
+      telefone: document.getElementById('telefone').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      numeroColaboradores: document.getElementById('numeroColaboradores').value,
+      mensagem: document.getElementById('mensagem').value.trim(),
+      website: document.getElementById('website').value,
+    };
+
+    if (!dados.nomeEmpresa || !dados.responsavel || !dados.telefone || !dados.email) {
+      mostrarErro('Preencha os campos obrigatórios: empresa, responsável, telefone e e-mail.');
+      return;
+    }
+
+    submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
+
+    try {
+      const resposta = await fetch(`${ALVEA_CORP_API_BASE_URL}/contato/corporativo`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados),
+      });
+
+      const resultado = await resposta.json().catch(() => ({}));
+
+      if (!resposta.ok) {
+        throw new Error(resultado.erro || 'Não foi possível enviar sua solicitação. Tente novamente.');
+      }
+
+      document.getElementById('formularioWrap').style.display = 'none';
+      document.getElementById('sucessoWrap').style.display = 'block';
+    } catch (erro) {
+      mostrarErro(erro.message);
+    } finally {
+      submitBtn.classList.remove('loading');
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>

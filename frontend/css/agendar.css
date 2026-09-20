@@ -1,0 +1,486 @@
+/* ==========================================================================
+   Alvea Tech — Fluxo de Agendamento
+   ========================================================================== */
+
+.agendar-main { padding: 48px 0 80px; }
+
+.agendar-title { margin-bottom: 40px; }
+.agendar-title h1 { font-size: clamp(24px, 2.6vw, 30px); }
+.agendar-title p { color: var(--alvea-text-muted); margin-top: 8px; font-size: 15px; }
+
+/* ---------- Stepper ---------- */
+
+.stepper {
+  display: flex;
+  align-items: center;
+  max-width: 640px;
+  margin-bottom: 48px;
+}
+
+.stepper-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.stepper-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--alvea-white);
+  border: 2px solid #E3E7EA;
+  color: var(--alvea-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 13.5px;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.stepper-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--alvea-text-muted);
+  white-space: nowrap;
+  display: none;
+}
+
+.stepper-line {
+  height: 2px;
+  flex: 1;
+  background: #E3E7EA;
+  margin: 0 6px;
+  transition: background 0.2s ease;
+}
+
+.stepper-item.done .stepper-circle {
+  background: var(--alvea-green);
+  border-color: var(--alvea-green);
+  color: var(--alvea-white);
+}
+
+.stepper-item.active .stepper-circle {
+  border-color: var(--alvea-blue);
+  color: var(--alvea-blue);
+  background: var(--alvea-blue-light);
+}
+
+.stepper-item.active .stepper-label,
+.stepper-item.done .stepper-label { color: var(--alvea-text); }
+
+.stepper-item.done ~ .stepper-line,
+.stepper-item.done .stepper-line { background: var(--alvea-green); }
+
+@media (min-width: 720px) {
+  .stepper-label { display: inline; }
+}
+
+/* ---------- Painéis de etapa ---------- */
+
+.step-panel { display: none; }
+.step-panel.active { display: block; animation: alvea-fade-in 0.35s ease; }
+
+@keyframes alvea-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.step-panel h2 { font-size: 20px; margin-bottom: 22px; }
+
+.step-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--alvea-text-muted);
+  margin-bottom: 20px;
+  padding: 0;
+}
+
+.step-back:hover { color: var(--alvea-blue); }
+.step-back svg { width: 16px; height: 16px; }
+
+/* ---------- Grid de especialidades ---------- */
+
+.specialty-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.option-card {
+  background: var(--alvea-white);
+  border: 1.5px solid #E9ECEF;
+  border-radius: var(--radius-md);
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  text-align: left;
+}
+
+.option-card:hover {
+  border-color: var(--alvea-blue);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card);
+}
+
+.option-card .option-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--alvea-blue-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.option-card .option-icon svg { width: 22px; height: 22px; stroke: var(--alvea-blue); }
+
+.option-card .option-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--alvea-text);
+}
+
+/* ---------- Lista de profissionais ---------- */
+
+.professional-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 640px;
+}
+
+.professional-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--alvea-white);
+  border: 1.5px solid #E9ECEF;
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.professional-card:hover {
+  border-color: var(--alvea-blue);
+  box-shadow: var(--shadow-card);
+}
+
+.professional-card .avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--alvea-green-light);
+  color: var(--alvea-green-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.professional-card .prof-info { flex: 1; }
+.professional-card .prof-name { font-family: var(--font-heading); font-weight: 600; font-size: 15px; }
+.professional-card .prof-spec { font-size: 13.5px; color: var(--alvea-text-muted); margin-top: 2px; }
+
+.professional-card .chevron { width: 18px; height: 18px; stroke: var(--alvea-text-muted); flex-shrink: 0; }
+
+/* ---------- Calendário + horários do dia ---------- */
+
+.schedule-picker {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  max-width: 760px;
+}
+
+.calendar {
+  background: var(--alvea-white);
+  border: 1.5px solid #E9ECEF;
+  border-radius: var(--radius-md);
+  padding: 20px;
+  width: 320px;
+  flex-shrink: 0;
+}
+
+.calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.calendar-month {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 14.5px;
+  color: var(--alvea-text);
+}
+
+.calendar-nav-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid #E3E7EA;
+  background: var(--alvea-white);
+  color: var(--alvea-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.calendar-nav-btn svg { width: 15px; height: 15px; }
+
+.calendar-nav-btn:hover:not(:disabled) {
+  border-color: var(--alvea-blue);
+  color: var(--alvea-blue);
+}
+
+.calendar-nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 6px;
+}
+
+.calendar-weekdays span {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--alvea-text-muted);
+  text-transform: uppercase;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  border-radius: 50%;
+  font-size: 13.5px;
+  color: var(--alvea-text);
+  cursor: default;
+}
+
+.calendar-day.is-filler { visibility: hidden; }
+
+.calendar-day.is-disabled {
+  color: #C7CDD2;
+}
+
+.calendar-day.has-slots {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--alvea-blue-dark);
+  background: var(--alvea-blue-light);
+  transition: all 0.15s ease;
+}
+
+.calendar-day.has-slots:hover {
+  background: var(--alvea-blue);
+  color: var(--alvea-white);
+}
+
+.calendar-day.is-today:not(.is-selected) {
+  box-shadow: inset 0 0 0 1.5px var(--alvea-green);
+}
+
+.calendar-day.is-selected {
+  background: var(--alvea-blue);
+  color: var(--alvea-white);
+}
+
+.day-times {
+  flex: 1;
+  min-width: 0;
+}
+
+.day-times-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 14.5px;
+  color: var(--alvea-text);
+  margin-bottom: 16px;
+}
+
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 12px;
+}
+
+.time-card {
+  background: var(--alvea-white);
+  border: 1.5px solid #E9ECEF;
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.18s ease;
+}
+
+.time-card:hover {
+  border-color: var(--alvea-blue);
+  box-shadow: var(--shadow-card);
+}
+
+.time-card .time-hour {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--alvea-blue-dark);
+}
+
+@media (max-width: 720px) {
+  .schedule-picker { flex-direction: column; }
+  .calendar { width: 100%; }
+}
+
+/* ---------- Estado vazio ---------- */
+
+.empty-state {
+  background: var(--alvea-white);
+  border: 1.5px dashed #D6DBDF;
+  border-radius: var(--radius-md);
+  padding: 40px;
+  text-align: center;
+  max-width: 480px;
+}
+
+.empty-state svg { width: 40px; height: 40px; stroke: var(--alvea-text-muted); margin-bottom: 14px; }
+.empty-state p { color: var(--alvea-text-muted); font-size: 14.5px; }
+
+/* ---------- Confirmação ---------- */
+
+.confirm-summary {
+  background: var(--alvea-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 28px;
+  max-width: 480px;
+  margin-bottom: 28px;
+}
+
+.confirm-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--alvea-bg-alt);
+}
+
+.confirm-row:last-child { border-bottom: none; }
+
+.confirm-row .confirm-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--alvea-blue-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.confirm-row .confirm-icon svg { width: 18px; height: 18px; stroke: var(--alvea-blue); }
+
+.confirm-row .confirm-label { font-size: 12.5px; color: var(--alvea-text-muted); }
+.confirm-row .confirm-value { font-family: var(--font-heading); font-weight: 600; font-size: 14.5px; margin-top: 2px; }
+
+/* ---------- Sucesso ---------- */
+
+.success-panel {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.success-icon {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--alvea-green-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+
+.success-icon svg { width: 38px; height: 38px; stroke: var(--alvea-green-dark); }
+
+.success-panel h2 { font-size: 24px; margin-bottom: 10px; }
+.success-panel p { color: var(--alvea-text-muted); font-size: 15px; margin-bottom: 8px; }
+
+.success-summary {
+  display: inline-block;
+  text-align: left;
+  background: var(--alvea-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 24px 28px;
+  margin: 24px 0 32px;
+}
+
+@media (max-width: 900px) {
+  .specialty-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .specialty-grid { grid-template-columns: 1fr; }
+  .professional-card { flex-wrap: wrap; }
+}
+
+.channel-options {
+  display: flex;
+  gap: 12px;
+}
+
+.channel-option {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 16px;
+  border: 1.5px solid #E3E7EA;
+  border-radius: var(--radius-sm);
+  font-size: 14.5px;
+  color: var(--alvea-text);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.channel-option input { accent-color: var(--alvea-blue); }
+
+.channel-option:has(input:checked) {
+  border-color: var(--alvea-blue);
+  background: var(--alvea-blue-light);
+  font-weight: 600;
+}

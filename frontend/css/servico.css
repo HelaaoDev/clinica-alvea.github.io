@@ -1,0 +1,190 @@
+/* ==========================================================================
+   Clínica Alvea — Detalhe de Serviço
+   ========================================================================== */
+
+.servico-hero {
+  padding: 56px 0 40px;
+  border-bottom: 1px solid rgba(15,110,140,0.08);
+}
+
+.servico-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--alvea-text-muted);
+  font-weight: 500;
+  margin-bottom: 28px;
+}
+
+.servico-back:hover { color: var(--alvea-blue); }
+.servico-back svg { width: 16px; height: 16px; }
+
+.servico-hero-content {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 44px;
+  align-items: center;
+}
+
+.servico-hero-top {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 18px;
+}
+
+.servico-icon-lg {
+  width: 76px;
+  height: 76px;
+  border-radius: 20px;
+  background: var(--alvea-blue-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.servico-icon-lg svg { width: 38px; height: 38px; stroke: var(--alvea-blue); }
+
+.servico-hero-text h1 {
+  font-size: clamp(26px, 3vw, 36px);
+}
+
+.servico-hero-text p {
+  color: var(--alvea-text-muted);
+  font-size: 16px;
+  margin-bottom: 24px;
+}
+
+.servico-hero-image {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  aspect-ratio: 4 / 3.3;
+}
+
+.servico-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 860px) {
+  .servico-hero-content { grid-template-columns: 1fr; }
+  .servico-hero-image { max-width: 480px; margin: 0 auto; }
+}
+
+.servico-main {
+  padding: 56px 0 96px;
+}
+
+.servico-section-title {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.servico-section-sub {
+  color: var(--alvea-text-muted);
+  font-size: 14.5px;
+  margin-bottom: 28px;
+}
+
+.servico-profissionais-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.servico-prof-card {
+  background: var(--alvea-white);
+  border: 1.5px solid #E9ECEF;
+  border-radius: var(--radius-md);
+  padding: 26px 22px;
+  text-align: center;
+}
+
+.servico-prof-card .avatar-circle,
+.servico-prof-card .avatar-photo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 0 auto 14px;
+}
+
+.servico-prof-card .avatar-circle {
+  background: var(--alvea-green-light);
+  color: var(--alvea-green-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.servico-prof-card .avatar-photo {
+  display: block;
+  object-fit: cover;
+}
+
+.servico-prof-card .prof-nome {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.servico-prof-card .prof-esp {
+  font-size: 12.5px;
+  color: var(--alvea-text-muted);
+  margin-top: 4px;
+}
+
+.servico-empty {
+  background: var(--alvea-bg-alt);
+  border-radius: var(--radius-md);
+  padding: 40px;
+  text-align: center;
+  color: var(--alvea-text-muted);
+  font-size: 14.5px;
+}
+
+.servico-cta-band {
+  background: var(--alvea-blue);
+  border-radius: var(--radius-lg);
+  padding: 40px 44px;
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.servico-cta-band h3 {
+  color: var(--alvea-white);
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.servico-cta-band p {
+  color: rgba(255,255,255,0.8);
+  font-size: 14.5px;
+}
+
+.servico-cta-band .btn-primary {
+  background: var(--alvea-white);
+  color: var(--alvea-blue-dark);
+  box-shadow: none;
+  flex-shrink: 0;
+}
+
+.servico-cta-band .btn-primary:hover { background: var(--alvea-green-light); }
+
+@media (max-width: 900px) {
+  .servico-profissionais-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .servico-profissionais-grid { grid-template-columns: 1fr; }
+  .servico-cta-band { flex-direction: column; align-items: flex-start; }
+}

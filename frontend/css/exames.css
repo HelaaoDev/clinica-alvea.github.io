@@ -1,0 +1,210 @@
+/* ==========================================================================
+   Alvea Tech — Meus Exames
+   ========================================================================== */
+
+.exams-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 760px;
+}
+
+.exam-card {
+  background: var(--alvea-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 22px 26px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  flex-wrap: wrap;
+}
+
+.exam-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.exam-icon-block {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--alvea-blue-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.exam-icon-block svg { width: 24px; height: 24px; stroke: var(--alvea-blue); }
+
+.exam-card.status-concluido .exam-icon-block {
+  background: var(--alvea-green-light);
+}
+.exam-card.status-concluido .exam-icon-block svg { stroke: var(--alvea-green-dark); }
+
+.exam-info { flex: 1; min-width: 180px; }
+
+.exam-info .exam-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--alvea-text);
+}
+
+.exam-info .exam-date {
+  font-size: 13.5px;
+  color: var(--alvea-text-muted);
+  margin-top: 3px;
+}
+
+.exam-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.exam-status-badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.exam-status-badge.aguardando_resultado {
+  background: var(--alvea-bg-alt);
+  color: var(--alvea-text-muted);
+}
+
+.exam-status-badge.concluido {
+  background: var(--alvea-green-light);
+  color: var(--alvea-green-dark);
+}
+
+.exam-chevron { width: 18px; height: 18px; stroke: var(--alvea-text-muted); flex-shrink: 0; }
+
+/* ---------- Estado vazio ---------- */
+
+.empty-exams {
+  background: var(--alvea-white);
+  border: 1.5px dashed #D6DBDF;
+  border-radius: var(--radius-md);
+  padding: 56px 40px;
+  text-align: center;
+  max-width: 480px;
+}
+
+.empty-exams .icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--alvea-bg-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.empty-exams .icon svg { width: 26px; height: 26px; stroke: var(--alvea-text-muted); }
+.empty-exams h3 { font-size: 17px; margin-bottom: 8px; }
+.empty-exams p { color: var(--alvea-text-muted); font-size: 14.5px; }
+
+/* ---------- Modal de detalhe do exame ---------- */
+
+.exam-modal-box {
+  background: var(--alvea-white);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  max-width: 480px;
+  width: 100%;
+  animation: alvea-fade-in 0.25s ease;
+  text-align: left;
+}
+
+.exam-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.exam-modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--alvea-text-muted);
+  padding: 4px;
+  flex-shrink: 0;
+}
+
+.exam-modal-close svg { width: 20px; height: 20px; }
+.exam-modal-close:hover { color: var(--alvea-text); }
+
+.exam-modal-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 19px;
+  color: var(--alvea-text);
+}
+
+.exam-modal-date {
+  font-size: 13.5px;
+  color: var(--alvea-text-muted);
+  margin-top: 4px;
+}
+
+.exam-modal-section {
+  margin-bottom: 20px;
+}
+
+.exam-modal-section .label {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--alvea-text-muted);
+  margin-bottom: 8px;
+}
+
+.exam-modal-laudo {
+  background: var(--alvea-bg-alt);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+  font-size: 14.5px;
+  color: var(--alvea-text);
+  line-height: 1.6;
+}
+
+.exam-modal-waiting {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--alvea-blue-light);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+}
+
+.exam-modal-waiting svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--alvea-blue);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.exam-modal-waiting p {
+  font-size: 14px;
+  color: var(--alvea-blue-dark);
+  line-height: 1.5;
+}
+
+@media (max-width: 560px) {
+  .exam-card { flex-direction: column; align-items: flex-start; }
+  .exam-actions { width: 100%; justify-content: space-between; }
+}

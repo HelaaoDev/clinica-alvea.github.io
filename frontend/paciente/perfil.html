@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu Perfil — Clínica Alvea</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/auth.css">
+<link rel="stylesheet" href="../css/app.css">
+<link rel="stylesheet" href="../css/agendamentos.css">
+<link rel="stylesheet" href="../css/perfil.css">
+</head>
+<body class="app-body">
+
+<header class="app-header">
+  <div class="container">
+    <a href="../index.html" class="logo">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" stroke="#0F6E8C" stroke-width="2"/>
+        <path d="M6 21h5l2.5-7 4 14 3-9 2 3h11.5" stroke="#3FA796" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      Clínica Alvea
+    </a>
+
+    <div class="app-user">
+      <a href="perfil.html" class="app-user-link" title="Editar perfil">
+        <div class="avatar" id="userAvatar">--</div>
+        <div>
+          <div class="name" id="userName">Carregando...</div>
+          <div class="role">Paciente</div>
+        </div>
+      </a>
+      <button class="app-logout" id="logoutBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        Sair
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="app-main">
+  <div class="container">
+
+    <div class="agendar-header-row">
+      <a href="home.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Voltar ao início
+      </a>
+    </div>
+
+    <div class="page-header-row">
+      <div class="page-title">
+        <h1>Meu Perfil</h1>
+        <p>Atualize seus dados pessoais, foto e senha de acesso.</p>
+      </div>
+    </div>
+
+    <div class="perfil-grid">
+
+      <!-- Coluna da foto -->
+      <div class="perfil-foto-card">
+        <div class="perfil-avatar-wrap">
+          <div class="perfil-avatar" id="perfilAvatar">--</div>
+          <label class="perfil-avatar-edit" title="Trocar foto">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            <input type="file" id="fotoInput" accept="image/png,image/jpeg,image/webp">
+          </label>
+        </div>
+        <div class="perfil-nome" id="perfilNomeExibicao">Carregando...</div>
+        <div class="perfil-role">Paciente</div>
+        <div class="perfil-foto-hint">PNG, JPG ou WEBP · até 5MB</div>
+        <div class="perfil-upload-status" id="fotoStatus"></div>
+      </div>
+
+      <!-- Coluna dos formulários -->
+      <div>
+
+        <!-- Dados pessoais -->
+        <div class="perfil-section-card">
+          <h2>Dados pessoais</h2>
+          <p class="section-sub">Essas informações ficam visíveis apenas para você e para a equipe da clínica.</p>
+
+          <div class="form-alert" id="perfilAlert">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+            <span id="perfilAlertText"></span>
+          </div>
+
+          <form id="perfilForm">
+            <div class="form-group">
+              <label for="nome">Nome completo</label>
+              <input type="text" id="nome" required>
+            </div>
+
+            <div class="perfil-form-row">
+              <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="text" id="telefone" placeholder="(00) 00000-0000">
+              </div>
+              <div class="form-group">
+                <label for="dataNascimento">Data de nascimento</label>
+                <input type="date" id="dataNascimento">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="endereco">Endereço</label>
+              <input type="text" id="endereco" placeholder="Rua, número — Cidade, UF">
+            </div>
+
+            <div class="form-group">
+              <label for="genero">Gênero</label>
+              <select id="genero">
+                <option value="">Prefiro não informar</option>
+                <option value="feminino">Feminino</option>
+                <option value="masculino">Masculino</option>
+                <option value="nao-binario">Não-binário</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+
+            <div class="perfil-actions">
+              <button type="submit" class="btn btn-primary auth-submit" id="perfilSubmitBtn">
+                <span class="btn-spinner"></span>
+                <span class="btn-label">Salvar alterações</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Familiares -->
+        <div class="perfil-section-card">
+          <div class="perfil-section-header">
+            <div>
+              <h2>Familiares</h2>
+              <p class="section-sub">Cadastre pessoas da sua família para agendar consultas para elas também.</p>
+            </div>
+            <button type="button" class="btn btn-secondary" id="addFamiliarBtn">+ Adicionar familiar</button>
+          </div>
+
+          <div class="form-alert" id="familiarAlert">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+            <span id="familiarAlertText"></span>
+          </div>
+
+          <div class="familiares-list" id="familiaresList">
+            <p class="familiares-empty" id="familiaresEmpty">Carregando familiares...</p>
+          </div>
+
+          <form id="familiarForm" class="familiar-form" hidden>
+            <input type="hidden" id="familiarId">
+            <div class="perfil-form-row">
+              <div class="form-group">
+                <label for="familiarNome">Nome completo</label>
+                <input type="text" id="familiarNome" required>
+              </div>
+              <div class="form-group">
+                <label for="familiarParentesco">Parentesco</label>
+                <select id="familiarParentesco" required>
+                  <option value="">Selecione</option>
+                  <option value="Cônjuge">Cônjuge</option>
+                  <option value="Filho(a)">Filho(a)</option>
+                  <option value="Pai">Pai</option>
+                  <option value="Mãe">Mãe</option>
+                  <option value="Irmão(ã)">Irmão(ã)</option>
+                  <option value="Outro">Outro</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="perfil-form-row">
+              <div class="form-group">
+                <label for="familiarDataNascimento">Data de nascimento</label>
+                <input type="date" id="familiarDataNascimento">
+              </div>
+              <div class="form-group">
+                <label for="familiarCpf">CPF (opcional)</label>
+                <input type="text" id="familiarCpf" placeholder="000.000.000-00" inputmode="numeric" maxlength="14">
+              </div>
+            </div>
+
+            <div class="perfil-actions" style="justify-content:flex-start; gap:12px;">
+              <button type="submit" class="btn btn-primary auth-submit" id="familiarSubmitBtn">
+                <span class="btn-spinner"></span>
+                <span class="btn-label">Salvar familiar</span>
+              </button>
+              <button type="button" class="btn btn-secondary" id="cancelFamiliarBtn">Cancelar</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Alterar senha -->
+        <div class="perfil-section-card">
+          <h2>Alterar senha</h2>
+          <p class="section-sub">Por segurança, informe sua senha atual para definir uma nova.</p>
+
+          <div class="form-alert" id="senhaAlert">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+            <span id="senhaAlertText"></span>
+          </div>
+
+          <form id="senhaForm">
+            <div class="form-group">
+              <label for="senhaAtual">Senha atual</label>
+              <div class="password-field">
+                <input type="password" id="senhaAtual" autocomplete="current-password" required>
+                <button type="button" class="password-toggle" data-target="senhaAtual" aria-label="Mostrar senha">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="perfil-form-row">
+              <div class="form-group">
+                <label for="novaSenha">Nova senha</label>
+                <div class="password-field">
+                  <input type="password" id="novaSenha" placeholder="Mínimo 6 caracteres" autocomplete="new-password" minlength="6" required>
+                  <button type="button" class="password-toggle" data-target="novaSenha" aria-label="Mostrar senha">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="confirmarNovaSenha">Confirmar nova senha</label>
+                <div class="password-field">
+                  <input type="password" id="confirmarNovaSenha" autocomplete="new-password" required>
+                  <button type="button" class="password-toggle" data-target="confirmarNovaSenha" aria-label="Mostrar senha">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
+                </div>
+                <div class="form-hint" id="matchHint"></div>
+              </div>
+            </div>
+
+            <div class="perfil-actions">
+              <button type="submit" class="btn btn-primary auth-submit" id="senhaSubmitBtn">
+                <span class="btn-spinner"></span>
+                <span class="btn-label">Alterar senha</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Modal de confirmação de remoção de familiar -->
+<div class="modal-overlay" id="familiarModalOverlay">
+  <div class="modal-box">
+    <div class="modal-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+    </div>
+    <h3>Remover familiar?</h3>
+    <p id="familiarModalText">Essa ação não pode ser desfeita.</p>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" id="familiarModalCancelBtn">Voltar</button>
+      <button class="btn btn-primary" id="familiarModalConfirmBtn" style="background:var(--alvea-danger); box-shadow:none;">Sim, remover</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+  const sessao = alveaRequireAuth('login.html');
+
+  document.getElementById('logoutBtn').addEventListener('click', () => alveaLogout('login.html'));
+
+  const telefoneInput = document.getElementById('telefone');
+  alveaAplicarMascaraTelefone(telefoneInput);
+
+  document.querySelectorAll('.password-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const alvo = document.getElementById(btn.dataset.target);
+      const visivel = alvo.type === 'text';
+      alvo.type = visivel ? 'password' : 'text';
+      btn.setAttribute('aria-label', visivel ? 'Mostrar senha' : 'Ocultar senha');
+      btn.innerHTML = visivel
+        ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'
+        : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.94 10.94 0 0112 20c-7 0-11-8-11-8a20.3 20.3 0 015.06-6.06M9.9 4.24A10.4 10.4 0 0112 4c7 0 11 8 11 8a20.3 20.3 0 01-3.22 4.44M14.12 14.12a3 3 0 11-4.24-4.24"/><path d="M1 1l22 22"/></svg>';
+    });
+  });
+
+  const novaSenhaInput = document.getElementById('novaSenha');
+  const confirmarNovaSenhaInput = document.getElementById('confirmarNovaSenha');
+  const matchHint = document.getElementById('matchHint');
+
+  function checarMatchSenha() {
+    if (!confirmarNovaSenhaInput.value) {
+      matchHint.textContent = '';
+      matchHint.className = 'form-hint';
+      return;
+    }
+    const coincide = novaSenhaInput.value === confirmarNovaSenhaInput.value;
+    matchHint.textContent = coincide ? 'As senhas coincidem.' : 'As senhas ainda não coincidem.';
+    matchHint.className = 'form-hint ' + (coincide ? 'match-ok' : 'match-error');
+  }
+
+  novaSenhaInput.addEventListener('input', checarMatchSenha);
+  confirmarNovaSenhaInput.addEventListener('input', checarMatchSenha);
+
+  /* ---------- Carregar dados atuais ---------- */
+
+  async function carregarPerfil() {
+    try {
+      const usuario = await alveaApiRequest('/auth/perfil', {
+        headers: { Authorization: `Bearer ${sessao.token}` },
+      });
+
+      // Header
+      document.getElementById('userName').textContent = usuario.nome;
+      alveaRenderAvatar('userAvatar', usuario);
+
+      // Card de foto
+      document.getElementById('perfilNomeExibicao').textContent = usuario.nome;
+      alveaRenderAvatar('perfilAvatar', usuario);
+
+      // Formulário
+      document.getElementById('nome').value = usuario.nome || '';
+      document.getElementById('telefone').value = usuario.telefone || '';
+      document.getElementById('dataNascimento').value = usuario.dataNascimento || '';
+      document.getElementById('endereco').value = usuario.endereco || '';
+      document.getElementById('genero').value = usuario.genero || '';
+
+      // Atualiza a sessão local com os dados mais recentes
+      alveaSaveSession(usuario, sessao.token);
+    } catch (erro) {
+      console.error(erro.message);
+    }
+  }
+
+  /* ---------- Formulário de dados pessoais ---------- */
+
+  const perfilAlert = document.getElementById('perfilAlert');
+  const perfilAlertText = document.getElementById('perfilAlertText');
+  const perfilSubmitBtn = document.getElementById('perfilSubmitBtn');
+
+  document.getElementById('perfilForm').addEventListener('submit', async (evento) => {
+    evento.preventDefault();
+    perfilAlert.classList.remove('show', 'success');
+
+    const nome = document.getElementById('nome').value.trim();
+    if (!nome) {
+      perfilAlertText.textContent = 'O nome não pode ficar em branco.';
+      perfilAlert.classList.add('show');
+      return;
+    }
+
+    perfilSubmitBtn.classList.add('loading');
+    perfilSubmitBtn.disabled = true;
+
+    try {
+      const usuarioAtualizado = await alveaApiRequest('/auth/perfil', {
+        method: 'PUT',
+        headers: { Authorization: `Bearer ${sessao.token}` },
+        body: JSON.stringify({
+          nome,
+          telefone: document.getElementById('telefone').value.trim(),
+          dataNascimento: document.getElementById('dataNascimento').value,
+          endereco: document.getElementById('endereco').value.trim(),
+          genero: document.getElementById('genero').value,
+        }),
+      });
+
+      alveaSaveSession(usuarioAtualizado, sessao.token);
+      document.getElementById('userName').textContent = usuarioAtualizado.nome;
+      document.getElementById('perfilNomeExibicao').textContent = usuarioAtualizado.nome;
+
+      perfilAlertText.textContent = 'Dados atualizados com sucesso!';
+      perfilAlert.classList.add('show', 'success');
+    } catch (erro) {
+      perfilAlertText.textContent = erro.message;
+      perfilAlert.classList.add('show');
+    } finally {
+      perfilSubmitBtn.classList.remove('loading');
+      perfilSubmitBtn.disabled = false;
+    }
+  });
+
+  /* ---------- Upload de foto ---------- */
+
+  const fotoInput = document.getElementById('fotoInput');
+  const fotoStatus = document.getElementById('fotoStatus');
+
+  fotoInput.addEventListener('change', async () => {
+    const arquivo = fotoInput.files[0];
+    if (!arquivo) return;
+
+    fotoStatus.textContent = 'Enviando foto...';
+    fotoStatus.classList.remove('error', 'success');
+
+    const formData = new FormData();
+    formData.append('foto', arquivo);
+
+    try {
+      const usuarioAtualizado = await alveaApiUpload('/auth/foto-perfil', formData, sessao.token);
+
+      alveaSaveSession(usuarioAtualizado, sessao.token);
+      alveaRenderAvatar('userAvatar', usuarioAtualizado);
+      alveaRenderAvatar('perfilAvatar', usuarioAtualizado);
+
+      fotoStatus.textContent = 'Foto atualizada com sucesso!';
+      fotoStatus.classList.add('success');
+    } catch (erro) {
+      fotoStatus.textContent = erro.message;
+      fotoStatus.classList.add('error');
+    } finally {
+      fotoInput.value = '';
+    }
+  });
+
+  /* ---------- Formulário de senha ---------- */
+
+  const senhaAlert = document.getElementById('senhaAlert');
+  const senhaAlertText = document.getElementById('senhaAlertText');
+  const senhaSubmitBtn = document.getElementById('senhaSubmitBtn');
+
+  document.getElementById('senhaForm').addEventListener('submit', async (evento) => {
+    evento.preventDefault();
+    senhaAlert.classList.remove('show', 'success');
+
+    const senhaAtual = document.getElementById('senhaAtual').value;
+    const novaSenha = document.getElementById('novaSenha').value;
+    const confirmarNovaSenha = document.getElementById('confirmarNovaSenha').value;
+
+    if (novaSenha.length < 6) {
+      senhaAlertText.textContent = 'A nova senha deve ter pelo menos 6 caracteres.';
+      senhaAlert.classList.add('show');
+      return;
+    }
+
+    if (novaSenha !== confirmarNovaSenha) {
+      senhaAlertText.textContent = 'A confirmação não coincide com a nova senha.';
+      senhaAlert.classList.add('show');
+      return;
+    }
+
+    senhaSubmitBtn.classList.add('loading');
+    senhaSubmitBtn.disabled = true;
+
+    try {
+      await alveaApiRequest('/auth/senha', {
+        method: 'PUT',
+        headers: { Authorization: `Bearer ${sessao.token}` },
+        body: JSON.stringify({ senhaAtual, novaSenha }),
+      });
+
+      senhaAlertText.textContent = 'Senha alterada com sucesso!';
+      senhaAlert.classList.add('show', 'success');
+      document.getElementById('senhaForm').reset();
+    } catch (erro) {
+      senhaAlertText.textContent = erro.message;
+      senhaAlert.classList.add('show');
+    } finally {
+      senhaSubmitBtn.classList.remove('loading');
+      senhaSubmitBtn.disabled = false;
+    }
+  });
+
+  /* ---------- Familiares ---------- */
+
+  let FAMILIARES = [];
+  const familiarAlert = document.getElementById('familiarAlert');
+  const familiarAlertText = document.getElementById('familiarAlertText');
+  const familiaresList = document.getElementById('familiaresList');
+  const familiarForm = document.getElementById('familiarForm');
+  const familiarSubmitBtn = document.getElementById('familiarSubmitBtn');
+  const addFamiliarBtn = document.getElementById('addFamiliarBtn');
+  const cancelFamiliarBtn = document.getElementById('cancelFamiliarBtn');
+  const familiarCpfInput = document.getElementById('familiarCpf');
+  alveaAplicarMascaraCpf(familiarCpfInput);
+
+  const ICONE_EDITAR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>';
+  const ICONE_REMOVER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z"/></svg>';
+
+  function calcularIdade(dataNascimento) {
+    if (!dataNascimento) return null;
+    const nascimento = new Date(`${dataNascimento}T00:00`);
+    const hoje = new Date();
+    let idade = hoje.getFullYear() - nascimento.getFullYear();
+    const aindaNaoFezAniversario =
+      hoje.getMonth() < nascimento.getMonth() ||
+      (hoje.getMonth() === nascimento.getMonth() && hoje.getDate() < nascimento.getDate());
+    if (aindaNaoFezAniversario) idade -= 1;
+    return idade;
+  }
+
+  function esconderFormularioFamiliar() {
+    familiarForm.hidden = true;
+    familiarForm.reset();
+    document.getElementById('familiarId').value = '';
+    familiarAlert.classList.remove('show', 'success');
+  }
+
+  function mostrarFormularioFamiliar(familiar = null) {
+    familiarAlert.classList.remove('show', 'success');
+    if (familiar) {
+      document.getElementById('familiarId').value = familiar.id;
+      document.getElementById('familiarNome').value = familiar.nome;
+      document.getElementById('familiarParentesco').value = familiar.parentesco;
+      document.getElementById('familiarDataNascimento').value = familiar.dataNascimento || '';
+      document.getElementById('familiarCpf').value = familiar.cpf || '';
+      familiarSubmitBtn.querySelector('.btn-label').textContent = 'Salvar alterações';
+    } else {
+      familiarForm.reset();
+      document.getElementById('familiarId').value = '';
+      familiarSubmitBtn.querySelector('.btn-label').textContent = 'Salvar familiar';
+    }
+    familiarForm.hidden = false;
+    document.getElementById('familiarNome').focus();
+  }
+
+  function renderizarFamiliares() {
+    if (!FAMILIARES.length) {
+      familiaresList.innerHTML = '<p class="familiares-empty" id="familiaresEmpty">Você ainda não cadastrou nenhum familiar.</p>';
+      return;
+    }
+
+    familiaresList.innerHTML = FAMILIARES.map((f) => {
+      const idade = calcularIdade(f.dataNascimento);
+      const meta = idade !== null ? `${f.parentesco} · ${idade} anos` : f.parentesco;
+      return `
+        <div class="familiar-item" data-id="${f.id}">
+          <div class="familiar-avatar">${alveaIniciais(f.nome)}</div>
+          <div class="familiar-info">
+            <div class="familiar-nome">${f.nome}</div>
+            <div class="familiar-meta">${meta}</div>
+          </div>
+          <div class="familiar-item-actions">
+            <button type="button" class="familiar-edit-btn" title="Editar" data-id="${f.id}">${ICONE_EDITAR}</button>
+            <button type="button" class="familiar-delete-btn" title="Remover" data-id="${f.id}">${ICONE_REMOVER}</button>
+          </div>
+        </div>`;
+    }).join('');
+
+    familiaresList.querySelectorAll('.familiar-edit-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const familiar = FAMILIARES.find((f) => f.id === btn.dataset.id);
+        if (familiar) mostrarFormularioFamiliar(familiar);
+      });
+    });
+
+    familiaresList.querySelectorAll('.familiar-delete-btn').forEach((btn) => {
+      btn.addEventListener('click', () => abrirModalRemoverFamiliar(btn.dataset.id));
+    });
+  }
+
+  async function carregarFamiliares() {
+    try {
+      FAMILIARES = await alveaApiRequest('/familiares', {
+        headers: { Authorization: `Bearer ${sessao.token}` },
+      });
+      renderizarFamiliares();
+    } catch (erro) {
+      familiaresList.innerHTML = `<p class="familiares-empty">${erro.message}</p>`;
+    }
+  }
+
+  addFamiliarBtn.addEventListener('click', () => mostrarFormularioFamiliar());
+  cancelFamiliarBtn.addEventListener('click', esconderFormularioFamiliar);
+
+  familiarForm.addEventListener('submit', async (evento) => {
+    evento.preventDefault();
+    familiarAlert.classList.remove('show', 'success');
+
+    const id = document.getElementById('familiarId').value;
+    const payload = {
+      nome: document.getElementById('familiarNome').value.trim(),
+      parentesco: document.getElementById('familiarParentesco').value,
+      dataNascimento: document.getElementById('familiarDataNascimento').value,
+      cpf: document.getElementById('familiarCpf').value.trim(),
+    };
+
+    familiarSubmitBtn.classList.add('loading');
+    familiarSubmitBtn.disabled = true;
+
+    try {
+      await alveaApiRequest(id ? `/familiares/${id}` : '/familiares', {
+        method: id ? 'PUT' : 'POST',
+        headers: { Authorization: `Bearer ${sessao.token}` },
+        body: JSON.stringify(payload),
+      });
+
+      await carregarFamiliares();
+      esconderFormularioFamiliar();
+    } catch (erro) {
+      familiarAlertText.textContent = erro.message;
+      familiarAlert.classList.add('show');
+    } finally {
+      familiarSubmitBtn.classList.remove('loading');
+      familiarSubmitBtn.disabled = false;
+    }
+  });
+
+  /* ---------- Remoção de familiar ---------- */
+
+  const familiarModalOverlay = document.getElementById('familiarModalOverlay');
+  const familiarModalConfirmBtn = document.getElementById('familiarModalConfirmBtn');
+  const familiarModalCancelBtn = document.getElementById('familiarModalCancelBtn');
+  let idParaRemoverFamiliar = null;
+
+  function abrirModalRemoverFamiliar(id) {
+    idParaRemoverFamiliar = id;
+    familiarModalOverlay.classList.add('show');
+  }
+
+  function fecharModalRemoverFamiliar() {
+    familiarModalOverlay.classList.remove('show');
+    idParaRemoverFamiliar = null;
+  }
+
+  familiarModalCancelBtn.addEventListener('click', fecharModalRemoverFamiliar);
+  familiarModalOverlay.addEventListener('click', (e) => {
+    if (e.target === familiarModalOverlay) fecharModalRemoverFamiliar();
+  });
+
+  familiarModalConfirmBtn.addEventListener('click', async () => {
+    if (!idParaRemoverFamiliar) return;
+
+    familiarModalConfirmBtn.disabled = true;
+    familiarModalConfirmBtn.textContent = 'Removendo...';
+
+    try {
+      await alveaApiRequest(`/familiares/${idParaRemoverFamiliar}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${sessao.token}` },
+      });
+      await carregarFamiliares();
+      fecharModalRemoverFamiliar();
+    } catch (erro) {
+      alveaToast(erro.message);
+    } finally {
+      familiarModalConfirmBtn.disabled = false;
+      familiarModalConfirmBtn.textContent = 'Sim, remover';
+    }
+  });
+
+  if (sessao) {
+    carregarPerfil();
+    carregarFamiliares();
+  }
+</script>
+</body>
+</html>

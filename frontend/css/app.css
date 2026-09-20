@@ -1,0 +1,214 @@
+/* ==========================================================================
+   Alvea Tech — Área do paciente (dashboard)
+   ========================================================================== */
+
+.app-body { background: var(--alvea-bg-alt); min-height: 100vh; }
+
+.app-header {
+  background: var(--alvea-white);
+  border-bottom: 1px solid rgba(15,110,140,0.08);
+}
+
+.app-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76px;
+}
+
+.app-user {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.app-user-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px 6px 6px;
+  border-radius: var(--radius-pill);
+  transition: background 0.15s ease;
+}
+
+.app-user-link:hover { background: var(--alvea-bg-alt); }
+
+.app-user .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--alvea-blue-light);
+  color: var(--alvea-blue-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 15px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.app-user .avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.app-user .name {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 14.5px;
+  color: var(--alvea-text);
+}
+
+.app-user .role {
+  font-size: 12.5px;
+  color: var(--alvea-text-muted);
+}
+
+.app-logout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1.5px solid #E3E7EA;
+  border-radius: var(--radius-pill);
+  padding: 9px 18px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--alvea-text-muted);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.app-logout:hover {
+  border-color: var(--alvea-danger);
+  color: var(--alvea-danger);
+}
+
+.app-logout svg { width: 16px; height: 16px; }
+
+.app-main { padding: 56px 0 80px; }
+
+/* ---------- Componentes compartilhados entre páginas internas ---------- */
+
+.agendar-header-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--alvea-text-muted);
+  font-weight: 500;
+}
+
+.back-link:hover { color: var(--alvea-blue); }
+.back-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+.app-welcome h1 { font-size: clamp(24px, 2.6vw, 32px); }
+.app-welcome p { color: var(--alvea-text-muted); margin-top: 10px; font-size: 15px; }
+
+.next-appointment {
+  margin-top: 28px;
+  background: var(--alvea-blue-dark);
+  border-radius: var(--radius-md);
+  padding: 22px 26px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: var(--alvea-white);
+}
+
+.next-appointment .na-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.next-appointment .na-icon svg { width: 22px; height: 22px; }
+
+.next-appointment .na-label { font-size: 12.5px; color: rgba(255, 255, 255, 0.65); }
+.next-appointment .na-main { font-family: var(--font-heading); font-weight: 700; font-size: 16px; margin-top: 2px; }
+.next-appointment .na-sub { font-size: 13.5px; color: rgba(255, 255, 255, 0.75); margin-top: 2px; }
+
+.next-appointment .na-link {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--alvea-white);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  padding: 9px 18px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.next-appointment .na-link:hover { background: rgba(255, 255, 255, 0.12); }
+
+@media (max-width: 560px) {
+  .next-appointment { flex-wrap: wrap; }
+  .next-appointment .na-link { margin-left: 0; width: 100%; text-align: center; }
+}
+
+.app-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 40px;
+}
+
+.app-card {
+  background: var(--alvea-white);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.app-card.clickable { cursor: pointer; }
+.app-card.clickable:hover { transform: translateY(-5px); box-shadow: var(--shadow-card-hover); }
+
+.app-card .app-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--alvea-green-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.app-card .app-card-icon svg { width: 24px; height: 24px; stroke: var(--alvea-green-dark); }
+
+.app-card h3 { font-size: 17px; margin-bottom: 8px; }
+.app-card p { font-size: 14px; color: var(--alvea-text-muted); }
+
+.app-card .soon-badge {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--alvea-blue-dark);
+  background: var(--alvea-blue-light);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+@media (max-width: 900px) {
+  .app-cards { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agendar Consulta — Clínica Alvea</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/auth.css">
+<link rel="stylesheet" href="../css/app.css">
+<link rel="stylesheet" href="../css/agendar.css">
+</head>
+<body class="app-body">
+
+<header class="app-header">
+  <div class="container">
+    <a href="../index.html" class="logo">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" stroke="#0F6E8C" stroke-width="2"/>
+        <path d="M6 21h5l2.5-7 4 14 3-9 2 3h11.5" stroke="#3FA796" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      Clínica Alvea
+    </a>
+
+    <div class="app-user">
+      <a href="perfil.html" class="app-user-link" title="Editar perfil">
+        <div class="avatar" id="userAvatar">--</div>
+        <div>
+          <div class="name" id="userName">Carregando...</div>
+          <div class="role">Paciente</div>
+        </div>
+      </a>
+      <button class="app-logout" id="logoutBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        Sair
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="agendar-main">
+  <div class="container">
+
+    <div class="agendar-header-row">
+      <a href="home.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Voltar ao início
+      </a>
+    </div>
+
+    <div class="agendar-title">
+      <h1>Agendar Consulta</h1>
+      <p>Siga os passos abaixo para marcar seu horário.</p>
+    </div>
+
+    <!-- Stepper -->
+    <div class="stepper" id="stepper">
+      <div class="stepper-item active" data-step="1">
+        <div class="stepper-circle">1</div>
+        <span class="stepper-label">Especialidade</span>
+      </div>
+      <div class="stepper-line"></div>
+      <div class="stepper-item" data-step="2">
+        <div class="stepper-circle">2</div>
+        <span class="stepper-label">Profissional</span>
+      </div>
+      <div class="stepper-line"></div>
+      <div class="stepper-item" data-step="3">
+        <div class="stepper-circle">3</div>
+        <span class="stepper-label">Horário</span>
+      </div>
+      <div class="stepper-line"></div>
+      <div class="stepper-item" data-step="4">
+        <div class="stepper-circle">4</div>
+        <span class="stepper-label">Confirmar</span>
+      </div>
+    </div>
+
+    <div class="form-alert" id="formAlert" style="max-width:640px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+      <span id="formAlertText"></span>
+    </div>
+
+    <!-- ETAPA 1: Especialidade -->
+    <section class="step-panel active" id="step1">
+      <h2>Qual especialidade você precisa?</h2>
+      <div class="specialty-grid" id="specialtyGrid">
+        <p style="color:var(--alvea-text-muted); font-size:14px;">Carregando especialidades...</p>
+      </div>
+    </section>
+
+    <!-- ETAPA 2: Profissional -->
+    <section class="step-panel" id="step2">
+      <button class="step-back" data-back="1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Voltar
+      </button>
+      <h2>Escolha o profissional</h2>
+      <div class="professional-list" id="professionalList"></div>
+    </section>
+
+    <!-- ETAPA 3: Horário -->
+    <section class="step-panel" id="step3">
+      <button class="step-back" data-back="2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Voltar
+      </button>
+      <h2>Escolha o horário</h2>
+
+      <div class="schedule-picker" id="schedulePicker">
+        <div class="calendar">
+          <div class="calendar-nav">
+            <button type="button" class="calendar-nav-btn" id="calPrevBtn" aria-label="Mês anterior">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <div class="calendar-month" id="calMonthLabel"></div>
+            <button type="button" class="calendar-nav-btn" id="calNextBtn" aria-label="Próximo mês">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+          <div class="calendar-weekdays">
+            <span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span>
+          </div>
+          <div class="calendar-grid" id="calGrid"></div>
+        </div>
+
+        <div class="day-times">
+          <div class="day-times-title" id="dayTimesTitle">Selecione um dia</div>
+          <div class="time-grid" id="timeGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ETAPA 4: Confirmação -->
+    <section class="step-panel" id="step4">
+      <button class="step-back" data-back="3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Voltar
+      </button>
+      <h2>Confirme seu agendamento</h2>
+
+      <div class="form-group" style="max-width:480px; margin-bottom:24px;">
+        <label for="pacienteAlvo">Para quem é esta consulta?</label>
+        <select id="pacienteAlvo"></select>
+      </div>
+
+      <div class="confirm-summary" id="confirmSummary"></div>
+
+      <div class="form-group" style="max-width:480px; margin-bottom:24px;">
+        <label>Como você quer receber a confirmação?</label>
+        <div class="channel-options" id="channelOptions">
+          <label class="channel-option">
+            <input type="radio" name="canalNotificacao" value="email" checked>
+            <span>E-mail</span>
+          </label>
+          <label class="channel-option">
+            <input type="radio" name="canalNotificacao" value="sms">
+            <span>SMS</span>
+          </label>
+        </div>
+      </div>
+
+      <button class="btn btn-primary auth-submit" id="confirmBtn">
+        <span class="btn-spinner"></span>
+        <span class="btn-label">Confirmar agendamento</span>
+      </button>
+    </section>
+
+    <!-- SUCESSO -->
+    <section class="step-panel" id="stepSuccess">
+      <div class="success-panel">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <h2>Agendamento confirmado!</h2>
+        <p>Você receberá os detalhes na sua área de agendamentos.</p>
+
+        <div class="success-summary" id="successSummary"></div>
+
+        <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+          <a href="home.html" class="btn btn-secondary">Voltar ao início</a>
+          <a href="agendar.html" class="btn btn-primary" id="newAgendamentoBtn">Agendar outra consulta</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<script src="../js/config.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+  const sessao = alveaRequireAuth('login.html');
+  let ESTADO = { especialidade: null, profissionalId: null, profissionalNome: null, dataHora: null, familiarId: null, familiarNome: null };
+  let FAMILIARES = [];
+
+  if (sessao) {
+    const { usuario } = sessao;
+    const iniciais = usuario.nome.split(' ').filter(Boolean).slice(0, 2).map(p => p[0].toUpperCase()).join('');
+    document.getElementById('userName').textContent = usuario.nome;
+    alveaRenderAvatar('userAvatar', usuario);
+  }
+
+  document.getElementById('logoutBtn').addEventListener('click', () => alveaLogout('login.html'));
+
+  const formAlert = document.getElementById('formAlert');
+  const formAlertText = document.getElementById('formAlertText');
+
+  function mostrarErro(mensagem) {
+    formAlertText.textContent = mensagem;
+    formAlert.classList.add('show');
+  }
+  function esconderErro() {
+    formAlert.classList.remove('show');
+  }
+
+  /* ---------- Navegação entre etapas ---------- */
+
+  function irParaEtapa(numero) {
+    document.querySelectorAll('.step-panel').forEach((el) => el.classList.remove('active'));
+    document.getElementById(numero === 'success' ? 'stepSuccess' : `step${numero}`).classList.add('active');
+
+    if (numero !== 'success') {
+      document.querySelectorAll('.stepper-item').forEach((item) => {
+        const passoItem = Number(item.dataset.step);
+        item.classList.remove('active', 'done');
+        if (passoItem < numero) item.classList.add('done');
+        if (passoItem === numero) item.classList.add('active');
+      });
+      document.getElementById('stepper').style.display = 'flex';
+    } else {
+      document.getElementById('stepper').style.display = 'none';
+    }
+    esconderErro();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('.step-back').forEach((btn) => {
+    btn.addEventListener('click', () => irParaEtapa(Number(btn.dataset.back)));
+  });
+
+  /* ---------- Utilitários ---------- */
+
+  function formatarDataHora(iso) {
+    const data = new Date(iso);
+    let dataFormatada = data.toLocaleDateString('pt-BR', { weekday: 'short', day: '2-digit', month: 'short' });
+    dataFormatada = dataFormatada.charAt(0).toUpperCase() + dataFormatada.slice(1);
+    const horaFormatada = data.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    return { dataFormatada, horaFormatada };
+  }
+
+  function iniciaisDe(nome) {
+    return nome.split(' ').filter(Boolean).slice(0, 2).map((p) => p[0].toUpperCase()).join('');
+  }
+
+  /* ---------- Etapa 1: Especialidades ---------- */
+
+  const ICONE_PADRAO = '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 3v7.5a4.5 4.5 0 009 0V3M9 3H3.5M13.5 3H8"/><path d="M13.5 8.5v3a5.5 5.5 0 01-11 0v-1.3"/><circle cx="19" cy="8.5" r="2.5"/><path d="M19 11v2a6 6 0 01-6 6"/></svg>';
+
+  async function carregarEspecialidades() {
+    const grid = document.getElementById('specialtyGrid');
+    try {
+      const especialidades = await alveaApiRequest('/especialidades');
+
+      if (!especialidades.length) {
+        grid.innerHTML = '<div class="empty-state"><p>Nenhuma especialidade disponível no momento.</p></div>';
+        return;
+      }
+
+      grid.innerHTML = especialidades.map((esp) => `
+        <button class="option-card" data-especialidade="${esp}">
+          <div class="option-icon">${ICONE_PADRAO}</div>
+          <div class="option-title">${esp}</div>
+        </button>
+      `).join('');
+
+      grid.querySelectorAll('.option-card').forEach((card) => {
+        card.addEventListener('click', () => {
+          ESTADO.especialidade = card.dataset.especialidade;
+          ESTADO.profissionalId = null;
+          ESTADO.dataHora = null;
+          carregarProfissionais(ESTADO.especialidade);
+          irParaEtapa(2);
+        });
+      });
+    } catch (erro) {
+      grid.innerHTML = `<div class="empty-state"><p>${erro.message}</p></div>`;
+    }
+  }
+
+  /* ---------- Etapa 2: Profissionais ---------- */
+
+  async function carregarProfissionais(especialidade) {
+    const lista = document.getElementById('professionalList');
+    lista.innerHTML = '<p style="color:var(--alvea-text-muted); font-size:14px;">Carregando profissionais...</p>';
+
+    try {
+      const profissionais = await alveaApiRequest(`/profissionais?especialidade=${encodeURIComponent(especialidade)}`);
+
+      if (!profissionais.length) {
+        lista.innerHTML = '<div class="empty-state"><p>Nenhum profissional disponível para esta especialidade no momento.</p></div>';
+        return;
+      }
+
+      lista.innerHTML = profissionais.map((prof) => `
+        <button class="professional-card" data-id="${prof.id}" data-nome="${prof.nome}">
+          <div class="avatar">${iniciaisDe(prof.nome)}</div>
+          <div class="prof-info">
+            <div class="prof-name">${prof.nome}</div>
+            <div class="prof-spec">${prof.especialidade}</div>
+          </div>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      `).join('');
+
+      lista.querySelectorAll('.professional-card').forEach((card) => {
+        card.addEventListener('click', () => {
+          ESTADO.profissionalId = card.dataset.id;
+          ESTADO.profissionalNome = card.dataset.nome;
+          ESTADO.dataHora = null;
+          carregarHorarios(ESTADO.profissionalId);
+          irParaEtapa(3);
+        });
+      });
+    } catch (erro) {
+      lista.innerHTML = `<div class="empty-state"><p>${erro.message}</p></div>`;
+    }
+  }
+
+  /* ---------- Etapa 3: Calendário e horários ---------- */
+
+  const MESES_COMPLETO = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+  const DIAS_SEMANA_COMPLETO = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
+
+  let HORARIOS_POR_DIA = {}; // { 'AAAA-MM-DD': [iso, iso, ...] }
+  let CAL_ANO = 0;
+  let CAL_MES = 0; // 0-11
+  let DIA_SELECIONADO = null; // 'AAAA-MM-DD'
+
+  function chaveDia(iso) {
+    return iso.slice(0, 10);
+  }
+
+  async function carregarHorarios(profissionalId) {
+    const calGrid = document.getElementById('calGrid');
+    const timeGrid = document.getElementById('timeGrid');
+    calGrid.innerHTML = '<p style="color:var(--alvea-text-muted); font-size:14px;">Carregando horários...</p>';
+    timeGrid.innerHTML = '';
+    document.getElementById('dayTimesTitle').textContent = 'Selecione um dia';
+
+    try {
+      const resultado = await alveaApiRequest(`/profissionais/${profissionalId}/horarios`);
+      const horarios = (resultado.horariosDisponiveis || []).slice().sort();
+
+      if (!horarios.length) {
+        document.querySelector('.calendar').style.display = 'none';
+        document.getElementById('dayTimesTitle').textContent = '';
+        timeGrid.innerHTML = `
+          <div class="empty-state">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            <p>Este profissional não tem horários disponíveis no momento. Volte e escolha outro profissional.</p>
+          </div>`;
+        return;
+      }
+
+      document.querySelector('.calendar').style.display = '';
+
+      HORARIOS_POR_DIA = {};
+      horarios.forEach((iso) => {
+        const dia = chaveDia(iso);
+        (HORARIOS_POR_DIA[dia] = HORARIOS_POR_DIA[dia] || []).push(iso);
+      });
+
+      const primeiroDia = chaveDia(horarios[0]);
+      const dataInicial = new Date(`${primeiroDia}T00:00`);
+      CAL_ANO = dataInicial.getFullYear();
+      CAL_MES = dataInicial.getMonth();
+
+      renderizarCalendario();
+      selecionarDia(primeiroDia);
+    } catch (erro) {
+      calGrid.innerHTML = `<div class="empty-state"><p>${erro.message}</p></div>`;
+    }
+  }
+
+  function renderizarCalendario() {
+    document.getElementById('calMonthLabel').textContent = `${MESES_COMPLETO[CAL_MES]} de ${CAL_ANO}`;
+
+    const hojeChave = chaveDia(new Date().toISOString());
+    const diasComHorario = Object.keys(HORARIOS_POR_DIA).sort();
+    const menorMesComHorario = diasComHorario.length ? diasComHorario[0].slice(0, 7) : null;
+    const mesAtualChave = `${CAL_ANO}-${String(CAL_MES + 1).padStart(2, '0')}`;
+
+    document.getElementById('calPrevBtn').disabled = menorMesComHorario !== null && mesAtualChave <= menorMesComHorario;
+
+    const primeiroDiaSemana = new Date(CAL_ANO, CAL_MES, 1).getDay();
+    const totalDiasMes = new Date(CAL_ANO, CAL_MES + 1, 0).getDate();
+
+    const celulas = [];
+    for (let i = 0; i < primeiroDiaSemana; i += 1) {
+      celulas.push('<span class="calendar-day is-filler"></span>');
+    }
+
+    for (let dia = 1; dia <= totalDiasMes; dia += 1) {
+      const chave = `${CAL_ANO}-${String(CAL_MES + 1).padStart(2, '0')}-${String(dia).padStart(2, '0')}`;
+      const temHorario = !!HORARIOS_POR_DIA[chave];
+      const classes = ['calendar-day'];
+      if (temHorario) classes.push('has-slots');
+      if (!temHorario) classes.push('is-disabled');
+      if (chave === hojeChave) classes.push('is-today');
+      if (chave === DIA_SELECIONADO) classes.push('is-selected');
+
+      celulas.push(`
+        <button type="button" class="${classes.join(' ')}" data-dia="${chave}" ${temHorario ? '' : 'disabled'}>
+          ${dia}
+        </button>`);
+    }
+
+    document.getElementById('calGrid').innerHTML = celulas.join('');
+
+    document.querySelectorAll('.calendar-day.has-slots').forEach((btn) => {
+      btn.addEventListener('click', () => selecionarDia(btn.dataset.dia));
+    });
+  }
+
+  function selecionarDia(chave) {
+    DIA_SELECIONADO = chave;
+    renderizarCalendario();
+
+    const data = new Date(`${chave}T00:00`);
+    const titulo = document.getElementById('dayTimesTitle');
+    titulo.textContent = `Horários em ${data.getDate()} de ${MESES_COMPLETO[data.getMonth()].toLowerCase()}, ${DIAS_SEMANA_COMPLETO[data.getDay()]}`;
+
+    const grid = document.getElementById('timeGrid');
+    const horariosDoDia = (HORARIOS_POR_DIA[chave] || []).slice().sort();
+
+    grid.innerHTML = horariosDoDia.map((iso) => {
+      const { horaFormatada } = formatarDataHora(iso);
+      return `<button class="time-card" data-iso="${iso}"><div class="time-hour">${horaFormatada}</div></button>`;
+    }).join('');
+
+    grid.querySelectorAll('.time-card').forEach((card) => {
+      card.addEventListener('click', () => {
+        ESTADO.dataHora = card.dataset.iso;
+        montarResumoConfirmacao();
+        irParaEtapa(4);
+      });
+    });
+  }
+
+  document.getElementById('calPrevBtn').addEventListener('click', () => {
+    CAL_MES -= 1;
+    if (CAL_MES < 0) { CAL_MES = 11; CAL_ANO -= 1; }
+    renderizarCalendario();
+  });
+
+  document.getElementById('calNextBtn').addEventListener('click', () => {
+    CAL_MES += 1;
+    if (CAL_MES > 11) { CAL_MES = 0; CAL_ANO += 1; }
+    renderizarCalendario();
+  });
+
+  /* ---------- Etapa 4: Confirmação ---------- */
+
+  async function carregarFamiliares() {
+    try {
+      FAMILIARES = await alveaApiRequest('/familiares', {
+        headers: { Authorization: `Bearer ${sessao.token}` },
+      });
+    } catch (erro) {
+      FAMILIARES = [];
+    }
+
+    const select = document.getElementById('pacienteAlvo');
+    select.innerHTML = [
+      `<option value="">${sessao.usuario.nome} (você)</option>`,
+      ...FAMILIARES.map((f) => `<option value="${f.id}">${f.nome} (${f.parentesco})</option>`),
+    ].join('');
+  }
+
+  document.getElementById('pacienteAlvo').addEventListener('change', (evento) => {
+    const id = evento.target.value;
+    const familiar = FAMILIARES.find((f) => f.id === id);
+    ESTADO.familiarId = id || null;
+    ESTADO.familiarNome = familiar ? familiar.nome : null;
+    montarResumoConfirmacao();
+  });
+
+  function montarResumoConfirmacao() {
+    const { dataFormatada, horaFormatada } = formatarDataHora(ESTADO.dataHora);
+    const resumo = document.getElementById('confirmSummary');
+    const nomePaciente = ESTADO.familiarNome || sessao.usuario.nome;
+
+    resumo.innerHTML = `
+      <div class="confirm-row">
+        <div class="confirm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+        <div><div class="confirm-label">Paciente</div><div class="confirm-value">${nomePaciente}</div></div>
+      </div>
+      <div class="confirm-row">
+        <div class="confirm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 3v7.5a4.5 4.5 0 009 0V3M9 3H3.5M13.5 3H8"/><path d="M13.5 8.5v3a5.5 5.5 0 01-11 0v-1.3"/><circle cx="19" cy="8.5" r="2.5"/><path d="M19 11v2a6 6 0 01-6 6"/></svg></div>
+        <div><div class="confirm-label">Especialidade</div><div class="confirm-value">${ESTADO.especialidade}</div></div>
+      </div>
+      <div class="confirm-row">
+        <div class="confirm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
+        <div><div class="confirm-label">Profissional</div><div class="confirm-value">${ESTADO.profissionalNome}</div></div>
+      </div>
+      <div class="confirm-row">
+        <div class="confirm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <div><div class="confirm-label">Data e horário</div><div class="confirm-value">${dataFormatada}, ${horaFormatada}</div></div>
+      </div>
+    `;
+  }
+
+  const confirmBtn = document.getElementById('confirmBtn');
+
+  confirmBtn.addEventListener('click', async () => {
+    esconderErro();
+    confirmBtn.classList.add('loading');
+    confirmBtn.disabled = true;
+
+    try {
+      const canalSelecionado = document.querySelector('input[name="canalNotificacao"]:checked').value;
+      await alveaApiRequest('/agendamentos', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${sessao.token}` },
+        body: JSON.stringify({
+          profissionalId: ESTADO.profissionalId,
+          dataHora: ESTADO.dataHora,
+          canalNotificacao: canalSelecionado,
+          familiarId: ESTADO.familiarId,
+        }),
+      });
+
+      const { dataFormatada, horaFormatada } = formatarDataHora(ESTADO.dataHora);
+      const nomePaciente = ESTADO.familiarNome || sessao.usuario.nome;
+      document.getElementById('successSummary').innerHTML = `
+        <div class="confirm-row" style="border:none; padding-top:0;">
+          <div class="confirm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <div><div class="confirm-label">Paciente</div><div class="confirm-value">${nomePaciente}</div></div>
+        </div>
+        <div class="confirm-row">
+          <div class="confirm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 3v7.5a4.5 4.5 0 009 0V3M9 3H3.5M13.5 3H8"/><path d="M13.5 8.5v3a5.5 5.5 0 01-11 0v-1.3"/><circle cx="19" cy="8.5" r="2.5"/><path d="M19 11v2a6 6 0 01-6 6"/></svg></div>
+          <div><div class="confirm-label">Especialidade</div><div class="confirm-value">${ESTADO.especialidade}</div></div>
+        </div>
+        <div class="confirm-row">
+          <div class="confirm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
+          <div><div class="confirm-label">Profissional</div><div class="confirm-value">${ESTADO.profissionalNome}</div></div>
+        </div>
+        <div class="confirm-row" style="border:none; padding-bottom:0;">
+          <div class="confirm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <div><div class="confirm-label">Data e horário</div><div class="confirm-value">${dataFormatada}, ${horaFormatada}</div></div>
+        </div>
+      `;
+
+      irParaEtapa('success');
+    } catch (erro) {
+      mostrarErro(erro.message);
+    } finally {
+      confirmBtn.classList.remove('loading');
+      confirmBtn.disabled = false;
+    }
+  });
+
+  /* ---------- Início ---------- */
+
+  if (sessao) {
+    carregarEspecialidades();
+    carregarFamiliares();
+  }
+</script>
+</body>
+</html>

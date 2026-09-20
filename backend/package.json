@@ -1,0 +1,36 @@
+{
+  "name": "clinica-alvea-backend",
+  "version": "1.0.0",
+  "description": "Backend do Sistema de Agendamento - Clínica Alvea (Clínica de Saúde)",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "testar-db": "node scripts/testar-supabase.js"
+  },
+  "keywords": [
+    "clinica",
+    "agendamento",
+    "saude",
+    "alvea-tech"
+  ],
+  "author": "Clínica Alvea",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.116.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^8.6.2",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.2.0",
+    "nodemailer": "^9.0.5",
+    "uuid": "^11.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}

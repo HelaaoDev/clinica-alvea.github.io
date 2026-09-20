@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clínica Alvea — Cuide da sua saúde com quem entende de cuidado</title>
+<meta name="description" content="Agende consultas, exames e acompanhe seus resultados em um só lugar. Clínica Alvea: tecnologia que respira cuidado.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="header">
+  <div class="container">
+    <a href="#home" class="logo">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" stroke="#0F6E8C" stroke-width="2"/>
+        <path d="M6 21h5l2.5-7 4 14 3-9 2 3h11.5" stroke="#3FA796" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      Clínica Alvea
+    </a>
+
+    <nav class="nav" id="mainNav">
+      <a href="#home">Início</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#planos">Planos</a>
+      <a href="#sobre">Relatos</a>
+      <a href="#faq">Dúvidas</a>
+      <a href="#contato">Contato</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="paciente/login.html" class="btn btn-secondary" id="headerEntrarBtn">Entrar</a>
+      <a href="paciente/perfil.html" class="header-user" id="headerUserLink" hidden>
+        <div class="avatar" id="headerUserAvatar">--</div>
+        <span class="name" id="headerUserName"></span>
+      </a>
+      <a href="#agendar" class="btn btn-primary" id="headerAgendarBtn">Agendar Consulta</a>
+      <button class="header-logout" id="headerLogoutBtn" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        Sair
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="home">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-bg-track" id="heroBgTrack">
+      <img src="img/hero-1.jpeg" alt="" class="active">
+      <img src="img/hero-2.jpeg" alt="">
+      <img src="img/hero-3.jpeg" alt="">
+    </div>
+    <div class="hero-gradient"></div>
+    <div class="hero-bg-dots" id="heroBgDots"></div>
+  </div>
+
+  <div class="container">
+    <div class="hero-content">
+      <svg class="hero-mark" viewBox="0 0 64 24" fill="none" aria-hidden="true">
+        <path d="M0 12h14l3.5-9 6 18 4-13 3 4h33.5" stroke="#3FA796" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h1>Cuidar da sua saúde<br>sem complicar a sua rotina</h1>
+      <p>Agende consultas, exames e acompanhamentos com poucos cliques. Acompanhe seu histórico e resultados sempre que precisar, com toda a segurança que sua saúde merece.</p>
+      <div class="hero-actions">
+        <a href="paciente/login.html" class="btn btn-primary">Agendar agora</a>
+        <a href="#servicos" class="btn btn-secondary">Conhecer serviços</a>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+
+<div class="pulse-divider pulse-divider-white" aria-hidden="true">
+
+  <svg viewBox="0 0 220 48"><path d="M0 24h50l10-18 14 36 10-24 8 12h12l10-14 12 26 10-18h64"/></svg>
+</div>
+
+<!-- ===================== SERVIÇOS ===================== -->
+<section class="services" id="servicos">
+  <div class="container">
+    <div class="section-heading center">
+      <span class="section-label">Nossos Serviços</span>
+      <h2>Tudo o que sua saúde precisa, em um só lugar</h2>
+      <p>Da consulta ao resultado do exame, cuidamos de cada etapa para que você não precise se preocupar com o processo — só com o que importa: sua saúde.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-photo">
+          <img src="img/atendimento_medico.jpeg" alt="Consulta médica na Clínica Alvea">
+        </div>
+        <div class="service-body">
+          <h3>Atendimento médico</h3>
+          <p>Consultas com clínicos gerais e especialistas, com horários flexíveis e escolha do profissional.</p>
+          <a href="servico.html?tipo=medico" class="service-link">Ver profissionais</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-photo">
+          <img src="img/exames_laboratoriais.jpeg" alt="Exames laboratoriais e de imagem">
+        </div>
+        <div class="service-body">
+          <h3>Exames laboratoriais e de imagem</h3>
+          <p>Realize exames e acompanhe os resultados diretamente na sua área do paciente, sem burocracia.</p>
+          <a href="servico.html?tipo=exames" class="service-link">Ver profissionais</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-photo">
+          <img src="img/aconselhamento_nutricional.jpeg" alt="Aconselhamento nutricional">
+        </div>
+        <div class="service-body">
+          <h3>Aconselhamento nutricional</h3>
+          <p>Acompanhamento com nutricionistas para construir hábitos alimentares sustentáveis, no seu ritmo.</p>
+          <a href="servico.html?tipo=nutricao" class="service-link">Ver profissionais</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-photo">
+          <img src="img/outros_procedimentos.jpeg" alt="Outros procedimentos de saúde">
+        </div>
+        <div class="service-body">
+          <h3>Outros procedimentos</h3>
+          <p>Vacinação, curativos e demais cuidados de saúde realizados por nossa equipe especializada.</p>
+          <a href="servico.html?tipo=outros" class="service-link">Ver profissionais</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NOSSOS PROFISSIONAIS ===================== -->
+<section class="professionals" id="profissionais">
+  <div class="container">
+    <div class="section-heading center">
+      <span class="section-label">Nossos Profissionais</span>
+      <h2>Quem cuida de você e da sua família</h2>
+      <p>Uma equipe qualificada e próxima, pronta para te atender em cada especialidade da clínica.</p>
+    </div>
+
+    <div class="professionals-grid" id="professionalsGrid">
+      <p style="color:var(--alvea-text-muted); font-size:14px; text-align:center; grid-column:1/-1;">Carregando profissionais...</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CREDIBILIDADE ===================== -->
+<section class="credibility">
+  <div class="container">
+    <div>
+      <span class="section-label credibility-label">Por que a Clínica Alvea</span>
+      <h2>Cuidado próximo, com a solidez de quem já ajudou milhares de pacientes</h2>
+      <p>Unimos profissionais qualificados a uma plataforma simples de usar — pensada para que agendar uma consulta seja tão fácil quanto deveria sempre ter sido.</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">2.400+</div>
+        <div class="stat-label">Pacientes atendidos</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">7</div>
+        <div class="stat-label">Especialidades disponíveis</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">4.9/5</div>
+        <div class="stat-label">Avaliação média dos pacientes</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">98%</div>
+        <div class="stat-label">Resultados de exames entregues no prazo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PLANOS ===================== -->
+<section class="plans" id="planos">
+  <div class="container">
+    <div class="section-heading center">
+      <span class="section-label">Planos</span>
+      <h2>Um plano para cada momento da sua saúde</h2>
+      <p>Escolha a forma de cuidado que melhor se encaixa na sua rotina — ou na da sua família.</p>
+    </div>
+
+    <div class="plans-grid">
+      <div class="plan-card">
+        <div class="plan-header">Consulta Avulsa</div>
+        <div class="plan-body">
+          <div class="plan-audience">Para quem quer agendar sem vínculo recorrente</div>
+          <ul class="plan-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>1 consulta médica avulsa</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Histórico digital do atendimento</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Lembretes de retorno</li>
+          </ul>
+          <a href="#agendar" class="btn btn-secondary btn-block">Agendar consulta</a>
+        </div>
+      </div>
+
+      <div class="plan-card featured">
+        <span class="plan-badge">Mais escolhido</span>
+        <div class="plan-header">Plano Família</div>
+        <div class="plan-body">
+          <div class="plan-audience">Para famílias que cuidam da saúde com frequência</div>
+          <ul class="plan-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Agendamento prioritário para até 4 pessoas</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Descontos em exames laboratoriais</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Painel de saúde compartilhado da família</li>
+          </ul>
+          <a href="#agendar" class="btn btn-primary btn-block">Agendar consulta</a>
+        </div>
+      </div>
+
+      <div class="plan-card">
+        <div class="plan-header">Plano Corporativo</div>
+        <div class="plan-body">
+          <div class="plan-audience">Para empresas parceiras e seus colaboradores</div>
+          <ul class="plan-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Agendamento facilitado para equipes</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Exames periódicos programados</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Relatório de saúde ocupacional</li>
+          </ul>
+          <a href="contato-empresa.html" class="btn btn-secondary btn-block">Falar com a clínica</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="pulse-divider" aria-hidden="true">
+  <svg viewBox="0 0 220 48"><path d="M0 24h50l10-18 14 36 10-24 8 12h12l10-14 12 26 10-18h64"/></svg>
+</div>
+<br>
+
+<!-- ===================== DEPOIMENTOS ===================== -->
+<section class="testimonial" id="sobre">
+  <div class="container">
+    <div class="testimonial-carousel-wrap">
+      <button class="testimonial-arrow" id="testimonialPrev" aria-label="Depoimento anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+
+      <div class="testimonial-carousel" id="testimonialCarousel">
+        <div class="testimonial-track" id="testimonialTrack">
+
+          <div class="testimonial-slide">
+            <p class="testimonial-quote">"Marquei minha consulta em menos de dois minutos e recebi o resultado do meu exame direto na plataforma, sem precisar ligar pra clínica. A Clínica Alvea deixou tudo mais simples."</p>
+            <div class="testimonial-author">
+              <img src="img/retratos_relatos/camila_relato.jpeg" alt="Foto de Camila Ferreira">
+              <div>
+                <div class="name">Camila Ferreira</div>
+                <div class="role">Paciente Clínica Alvea</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-slide">
+            <p class="testimonial-quote">"Recebi um e-mail confirmando minha consulta de cardiologia na hora, com todos os detalhes. Cheguei no dia certo, no horário certo, sem nenhuma dúvida."</p>
+            <div class="testimonial-author">
+              <img src="img/retratos_relatos/roberto_relato.jpeg" alt="Foto de Roberto Almeida">
+              <div>
+                <div class="name">Roberto Almeida</div>
+                <div class="role">Paciente Clínica Alvea</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-slide">
+            <p class="testimonial-quote">"Já tentei marcar fisioterapia em outros lugares e sempre era complicado. Aqui escolhi o profissional, o horário e pronto — muito mais tranquilo do que eu esperava."</p>
+            <div class="testimonial-author">
+              <img src="img/retratos_relatos/juliana_relato.jpeg" alt="Foto de Juliana Prado">
+              <div>
+                <div class="name">Juliana Prado</div>
+                <div class="role">Paciente Clínica Alvea</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <button class="testimonial-arrow" id="testimonialNext" aria-label="Próximo depoimento">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+
+    <div class="testimonial-dots" id="testimonialDots"></div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-heading center">
+      <span class="section-label">Dúvidas Frequentes</span>
+      <h2>Perguntas que podem estar passando pela sua cabeça</h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item open">
+        <button class="faq-question">
+          Quais serviços a clínica oferece?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Atendimento médico com clínicos gerais e especialistas, exames laboratoriais e de imagem, aconselhamento nutricional e outros procedimentos de cuidado à saúde.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Como faço para agendar uma consulta?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Basta criar sua conta, escolher a especialidade e o profissional desejado, selecionar um horário disponível e confirmar com seus dados. Você recebe a confirmação na hora.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Posso escolher o profissional que vou consultar?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Sim. Depois de escolher a especialidade, você vê a lista de profissionais disponíveis e os horários de cada um antes de confirmar o agendamento.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Como consulto ou cancelo um agendamento já feito?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Na sua área do paciente, em "Meus Agendamentos", você vê todos os horários marcados e pode cancelar qualquer um deles com um clique.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Onde posso ver o resultado dos meus exames?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Assim que o resultado é liberado pela clínica, ele aparece automaticamente em "Meus Exames", na sua área do paciente — com laudo e, quando aplicável, arquivo para download.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Meus dados de saúde estão seguros na plataforma?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Sim. Seus dados são acessíveis apenas por você e pela equipe autorizada da clínica, com senha protegida e conexão segura em todas as etapas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA FINAL ===================== -->
+<section class="cta-final" id="agendar">
+  <div class="container">
+    <h2>Pronto para cuidar da sua saúde sem complicação?</h2>
+    <p>Crie sua conta gratuita e agende sua primeira consulta em poucos minutos.</p>
+    <a href="paciente/cadastro.html" class="btn btn-primary">Criar minha conta</a>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer" id="contato">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#home" class="logo">
+          <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="19" stroke="#FFFFFF" stroke-width="2"/>
+            <path d="M6 21h5l2.5-7 4 14 3-9 2 3h11.5" stroke="#8FE0CE" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          Clínica Alvea
+        </a>
+        <p>Tecnologia que respira cuidado. Soluções digitais para uma saúde mais acessível.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Horário de atendimento</h4>
+        <div class="footer-col-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          <span>Seg – Sex: 7h às 19h<br>Sáb: 8h às 13h</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <div class="footer-col-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.68 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0122 16.92z"/></svg>
+          <span>(11) 4000-1234</span>
+        </div>
+        <div class="footer-col-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4V4z"/><path d="M4 6l8 7 8-7"/></svg>
+          <span>contato@clinicaalvea.com.br</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Endereço</h4>
+        <div class="footer-col-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Av. das Nações, 1200<br>São Paulo, SP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Clínica Alvea. Todos os direitos reservados.</span>
+      <span>Projeto acadêmico — Sistema de Agendamento para Clínica de Saúde</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

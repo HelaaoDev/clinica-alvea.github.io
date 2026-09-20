@@ -1,0 +1,240 @@
+/* ==========================================================================
+   Alvea Tech — Meus Agendamentos
+   ========================================================================== */
+
+.page-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+
+.page-title h1 { font-size: clamp(24px, 2.6vw, 30px); }
+.page-title p { color: var(--alvea-text-muted); margin-top: 8px; font-size: 15px; }
+
+/* ---------- Filtros ---------- */
+
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.filter-tab {
+  background: var(--alvea-white);
+  border: 1.5px solid #E3E7EA;
+  border-radius: var(--radius-pill);
+  padding: 9px 18px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--alvea-text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.filter-tab:hover { border-color: var(--alvea-blue); color: var(--alvea-blue); }
+
+.filter-tab.active {
+  background: var(--alvea-blue);
+  border-color: var(--alvea-blue);
+  color: var(--alvea-white);
+}
+
+/* ---------- Lista de agendamentos ---------- */
+
+.appointments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 760px;
+}
+
+.appointment-card {
+  background: var(--alvea-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 22px 26px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.appointment-date-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 68px;
+  border-radius: var(--radius-sm);
+  background: var(--alvea-blue-light);
+  flex-shrink: 0;
+}
+
+.appointment-date-block .day {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--alvea-blue-dark);
+  line-height: 1.1;
+}
+
+.appointment-date-block .month {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--alvea-blue);
+  letter-spacing: 0.03em;
+}
+
+.appointment-card.status-cancelado .appointment-date-block {
+  background: var(--alvea-bg-alt);
+}
+.appointment-card.status-cancelado .appointment-date-block .day,
+.appointment-card.status-cancelado .appointment-date-block .month {
+  color: var(--alvea-text-muted);
+}
+
+.appointment-info { flex: 1; min-width: 180px; }
+
+.appointment-info .spec {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--alvea-text);
+}
+
+.appointment-info .prof {
+  font-size: 13.5px;
+  color: var(--alvea-text-muted);
+  margin-top: 3px;
+}
+
+.appointment-info .time {
+  font-size: 13px;
+  color: var(--alvea-text-muted);
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.appointment-info .time svg { width: 14px; height: 14px; }
+
+.appointment-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.status-badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.status-badge.confirmado { background: var(--alvea-green-light); color: var(--alvea-green-dark); }
+.status-badge.cancelado { background: var(--alvea-danger-light); color: #A83A39; }
+.status-badge.concluido { background: var(--alvea-blue-light); color: var(--alvea-blue-dark); }
+
+.cancel-btn {
+  background: none;
+  border: 1.5px solid #E3E7EA;
+  border-radius: var(--radius-pill);
+  padding: 8px 16px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--alvea-text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cancel-btn:hover { border-color: var(--alvea-danger); color: var(--alvea-danger); }
+
+/* ---------- Estado vazio ---------- */
+
+.empty-appointments {
+  background: var(--alvea-white);
+  border: 1.5px dashed #D6DBDF;
+  border-radius: var(--radius-md);
+  padding: 56px 40px;
+  text-align: center;
+  max-width: 480px;
+}
+
+.empty-appointments .icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--alvea-bg-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.empty-appointments .icon svg { width: 26px; height: 26px; stroke: var(--alvea-text-muted); }
+.empty-appointments h3 { font-size: 17px; margin-bottom: 8px; }
+.empty-appointments p { color: var(--alvea-text-muted); font-size: 14.5px; margin-bottom: 24px; }
+
+/* ---------- Modal de confirmação ---------- */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 25, 30, 0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 200;
+}
+
+.modal-overlay.show { display: flex; }
+
+.modal-box {
+  background: var(--alvea-white);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  animation: alvea-fade-in 0.25s ease;
+}
+
+.modal-box .modal-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--alvea-danger-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+
+.modal-box .modal-icon svg { width: 26px; height: 26px; stroke: var(--alvea-danger); }
+
+.modal-box h3 { font-size: 18px; margin-bottom: 10px; }
+.modal-box p { color: var(--alvea-text-muted); font-size: 14.5px; margin-bottom: 26px; }
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.modal-actions .btn { flex: 1; }
+
+@media (max-width: 560px) {
+  .appointment-card { flex-direction: column; align-items: flex-start; }
+  .appointment-actions { width: 100%; justify-content: space-between; }
+}

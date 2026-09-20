@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profissionais — Clínica Alvea</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/auth.css">
+<link rel="stylesheet" href="../css/app.css">
+<link rel="stylesheet" href="../css/agendamentos.css">
+<link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-body">
+
+<aside class="admin-sidebar">
+  <a href="dashboard.html" class="logo">
+    <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="19" stroke="#0F6E8C" stroke-width="2"/>
+      <path d="M6 21h5l2.5-7 4 14 3-9 2 3h11.5" stroke="#3FA796" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+    Clínica Alvea
+  </a>
+
+  <nav class="admin-nav">
+    <a href="dashboard.html" class="admin-nav-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+      Dashboard
+    </a>
+    <a href="profissionais.html" class="admin-nav-link active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+      Profissionais
+    </a>
+    <a href="agendamentos.html" class="admin-nav-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      Agendamentos
+    </a>
+    <a href="exames.html" class="admin-nav-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2v6L4 20a1 1 0 001 1h14a1 1 0 001-1L15 8V2M9 2h6M9 14h6"/></svg>
+      Exames
+    </a>
+    <a href="pacientes.html" class="admin-nav-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      Pacientes
+    </a>
+    <a href="contatos.html" class="admin-nav-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+      Contatos
+    </a>
+  </nav>
+
+  <div class="admin-sidebar-foot">
+    <div class="admin-user-mini">
+      <div class="avatar" id="userAvatar">--</div>
+      <div>
+        <div class="name" id="userName">Carregando...</div>
+        <div class="role">Administrador</div>
+      </div>
+    </div>
+    <button class="admin-logout-link" id="logoutBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+      Sair
+    </button>
+  </div>
+</aside>
+
+<div class="admin-content">
+  <main class="admin-main">
+
+    <div class="admin-page-header">
+      <div>
+        <h1>Profissionais</h1>
+        <p>Cadastre e gerencie os profissionais da clínica e seus horários.</p>
+      </div>
+      <button class="btn btn-primary" id="novoProfissionalBtn">+ Novo profissional</button>
+    </div>
+
+    <div class="admin-table-card">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Especialidade</th>
+            <th>Horários cadastrados</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tabelaCorpo">
+          <tr><td colspan="4" class="table-empty">Carregando profissionais...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+
+<!-- Modal de formulário (criar/editar) -->
+<div class="modal-overlay" id="formModalOverlay">
+  <div class="admin-modal-box">
+    <div class="admin-modal-header">
+      <h3 id="formModalTitulo">Novo profissional</h3>
+      <button class="admin-modal-close" id="formModalCloseBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="form-alert" id="formAlert">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+      <span id="formAlertText"></span>
+    </div>
+
+    <form id="profissionalForm">
+      <input type="hidden" id="profissionalId">
+
+      <div class="form-group">
+        <label for="nome">Nome completo</label>
+        <input type="text" id="nome" placeholder="Ex: Dra. Ana Souza" required>
+      </div>
+
+      <div class="form-group">
+        <label for="especialidade">Especialidade</label>
+        <input type="text" id="especialidade" placeholder="Ex: Cardiologia" required>
+      </div>
+
+      <div class="form-group">
+        <label>Horários disponíveis</label>
+        <div class="horarios-list" id="horariosList"></div>
+        <button type="button" class="add-horario-btn" id="addHorarioBtn">+ Adicionar horário</button>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block auth-submit" id="submitBtn">
+        <span class="btn-spinner"></span>
+        <span class="btn-label" id="submitLabel">Salvar profissional</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal de confirmação de exclusão -->
+<div class="modal-overlay" id="deleteModalOverlay">
+  <div class="modal-box">
+    <div class="modal-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+    </div>
+    <h3>Remover profissional?</h3>
+    <p id="deleteModalText">Essa ação não pode ser desfeita.</p>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" id="deleteCancelBtn">Voltar</button>
+      <button class="btn btn-primary" id="deleteConfirmBtn" style="background:var(--alvea-danger); box-shadow:none;">Sim, remover</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+  const sessao = alveaRequireAdmin();
+  let PROFISSIONAIS = [];
+  let idParaExcluir = null;
+  let contadorHorario = 0;
+
+  if (sessao) {
+    const { usuario } = sessao;
+    const iniciais = usuario.nome.split(' ').filter(Boolean).slice(0, 2).map(p => p[0].toUpperCase()).join('');
+    document.getElementById('userName').textContent = usuario.nome;
+    document.getElementById('userAvatar').textContent = iniciais;
+  }
+
+  document.getElementById('logoutBtn').addEventListener('click', () => alveaLogout('../paciente/login.html'));
+
+  const authHeaders = () => ({ Authorization: `Bearer ${sessao.token}` });
+
+  /* ---------- Tabela ---------- */
+
+  function renderizarTabela() {
+    const corpo = document.getElementById('tabelaCorpo');
+
+    if (!PROFISSIONAIS.length) {
+      corpo.innerHTML = '<tr><td colspan="4" class="table-empty">Nenhum profissional cadastrado ainda.</td></tr>';
+      return;
+    }
+
+    corpo.innerHTML = PROFISSIONAIS.map((prof) => `
+      <tr>
+        <td class="cell-strong">${prof.nome}</td>
+        <td>${prof.especialidade}</td>
+        <td class="cell-muted">${prof.horariosDisponiveis.length} horário(s)</td>
+        <td>
+          <div class="table-actions">
+            <button class="icon-btn" data-edit="${prof.id}" title="Editar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>
+            </button>
+            <button class="icon-btn danger" data-delete="${prof.id}" title="Remover">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z"/></svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+
+    corpo.querySelectorAll('[data-edit]').forEach((btn) => {
+      btn.addEventListener('click', () => abrirFormulario(btn.dataset.edit));
+    });
+    corpo.querySelectorAll('[data-delete]').forEach((btn) => {
+      btn.addEventListener('click', () => abrirModalExclusao(btn.dataset.delete));
+    });
+  }
+
+  async function carregarProfissionais() {
+    try {
+      PROFISSIONAIS = await alveaApiRequest('/profissionais');
+      renderizarTabela();
+    } catch (erro) {
+      document.getElementById('tabelaCorpo').innerHTML = `<tr><td colspan="4" class="table-empty">${erro.message}</td></tr>`;
+    }
+  }
+
+  /* ---------- Modal de formulário ---------- */
+
+  const formModalOverlay = document.getElementById('formModalOverlay');
+  const formAlert = document.getElementById('formAlert');
+  const formAlertText = document.getElementById('formAlertText');
+  const horariosList = document.getElementById('horariosList');
+
+  function esconderErro() { formAlert.classList.remove('show'); }
+  function mostrarErro(msg) { formAlertText.textContent = msg; formAlert.classList.add('show'); }
+
+  function criarLinhaHorario(valor = '') {
+    contadorHorario += 1;
+    const row = document.createElement('div');
+    row.className = 'horario-row';
+    row.innerHTML = `
+      <input type="datetime-local" class="horario-input" value="${valor}">
+      <button type="button" class="horario-remove" title="Remover horário">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    `;
+    row.querySelector('.horario-remove').addEventListener('click', () => row.remove());
+    return row;
+  }
+
+  document.getElementById('addHorarioBtn').addEventListener('click', () => {
+    horariosList.appendChild(criarLinhaHorario());
+  });
+
+  function abrirFormulario(id = null) {
+    esconderErro();
+    document.getElementById('profissionalForm').reset();
+    horariosList.innerHTML = '';
+
+    if (id) {
+      const prof = PROFISSIONAIS.find((p) => p.id === id);
+      document.getElementById('formModalTitulo').textContent = 'Editar profissional';
+      document.getElementById('submitLabel').textContent = 'Salvar alterações';
+      document.getElementById('profissionalId').value = prof.id;
+      document.getElementById('nome').value = prof.nome;
+      document.getElementById('especialidade').value = prof.especialidade;
+
+      if (prof.horariosDisponiveis.length) {
+        prof.horariosDisponiveis.forEach((h) => horariosList.appendChild(criarLinhaHorario(h)));
+      } else {
+        horariosList.appendChild(criarLinhaHorario());
+      }
+    } else {
+      document.getElementById('formModalTitulo').textContent = 'Novo profissional';
+      document.getElementById('submitLabel').textContent = 'Salvar profissional';
+      document.getElementById('profissionalId').value = '';
+      horariosList.appendChild(criarLinhaHorario());
+    }
+
+    formModalOverlay.classList.add('show');
+  }
+
+  function fecharFormulario() {
+    formModalOverlay.classList.remove('show');
+  }
+
+  document.getElementById('novoProfissionalBtn').addEventListener('click', () => abrirFormulario());
+  document.getElementById('formModalCloseBtn').addEventListener('click', fecharFormulario);
+  formModalOverlay.addEventListener('click', (e) => { if (e.target === formModalOverlay) fecharFormulario(); });
+
+  document.getElementById('profissionalForm').addEventListener('submit', async (evento) => {
+    evento.preventDefault();
+    esconderErro();
+
+    const id = document.getElementById('profissionalId').value;
+    const nome = document.getElementById('nome').value.trim();
+    const especialidade = document.getElementById('especialidade').value.trim();
+    const horariosDisponiveis = Array.from(horariosList.querySelectorAll('.horario-input'))
+      .map((input) => input.value)
+      .filter(Boolean);
+
+    if (!nome || !especialidade) {
+      mostrarErro('Preencha nome e especialidade.');
+      return;
+    }
+
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
+
+    try {
+      if (id) {
+        await alveaApiRequest(`/admin/profissionais/${id}`, {
+          method: 'PUT',
+          headers: authHeaders(),
+          body: JSON.stringify({ nome, especialidade, horariosDisponiveis }),
+        });
+      } else {
+        await alveaApiRequest('/admin/profissionais', {
+          method: 'POST',
+          headers: authHeaders(),
+          body: JSON.stringify({ nome, especialidade, horariosDisponiveis }),
+        });
+      }
+
+      await carregarProfissionais();
+      fecharFormulario();
+    } catch (erro) {
+      mostrarErro(erro.message);
+    } finally {
+      submitBtn.classList.remove('loading');
+      submitBtn.disabled = false;
+    }
+  });
+
+  /* ---------- Modal de exclusão ---------- */
+
+  const deleteModalOverlay = document.getElementById('deleteModalOverlay');
+  const deleteConfirmBtn = document.getElementById('deleteConfirmBtn');
+
+  function abrirModalExclusao(id) {
+    const prof = PROFISSIONAIS.find((p) => p.id === id);
+    idParaExcluir = id;
+    document.getElementById('deleteModalText').textContent = `Tem certeza que deseja remover ${prof ? prof.nome : 'este profissional'}? Essa ação não pode ser desfeita.`;
+    deleteModalOverlay.classList.add('show');
+  }
+
+  function fecharModalExclusao() {
+    deleteModalOverlay.classList.remove('show');
+    idParaExcluir = null;
+  }
+
+  document.getElementById('deleteCancelBtn').addEventListener('click', fecharModalExclusao);
+  deleteModalOverlay.addEventListener('click', (e) => { if (e.target === deleteModalOverlay) fecharModalExclusao(); });
+
+  deleteConfirmBtn.addEventListener('click', async () => {
+    if (!idParaExcluir) return;
+
+    deleteConfirmBtn.disabled = true;
+    deleteConfirmBtn.textContent = 'Removendo...';
+
+    try {
+      await alveaApiRequest(`/admin/profissionais/${idParaExcluir}`, {
+        method: 'DELETE',
+        headers: authHeaders(),
+      });
+      await carregarProfissionais();
+      fecharModalExclusao();
+    } catch (erro) {
+      alveaToast(erro.message, 'error');
+    } finally {
+      deleteConfirmBtn.disabled = false;
+      deleteConfirmBtn.textContent = 'Sim, remover';
+    }
+  });
+
+  if (sessao) {
+    carregarProfissionais();
+  }
+</script>
+</body>
+</html>

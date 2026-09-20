@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Serviço — Clínica Alvea</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/servico.css">
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="header">
+  <div class="container">
+    <a href="index.html" class="logo">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" stroke="#0F6E8C" stroke-width="2"/>
+        <path d="M6 21h5l2.5-7 4 14 3-9 2 3h11.5" stroke="#3FA796" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      Clínica Alvea
+    </a>
+
+    <nav class="nav" id="mainNav">
+      <a href="index.html#home">Início</a>
+      <a href="index.html#servicos">Serviços</a>
+      <a href="index.html#planos">Planos</a>
+      <a href="index.html#sobre">Relatos</a>
+      <a href="index.html#faq">Dúvidas</a>
+      <a href="index.html#contato">Contato</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="paciente/login.html" class="btn btn-secondary">Entrar</a>
+      <a href="paciente/agendar.html" class="btn btn-primary">Agendar Consulta</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== HERO DO SERVIÇO ===================== -->
+<section class="servico-hero">
+  <div class="container">
+    <a href="index.html#servicos" class="servico-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Voltar aos serviços
+    </a>
+
+    <div class="servico-hero-content">
+      <div class="servico-hero-text">
+        <div class="servico-hero-top">
+          <div class="servico-icon-lg" id="servicoIcone"></div>
+          <h1 id="servicoTitulo">Carregando...</h1>
+        </div>
+        <p id="servicoDescricao"></p>
+        <a href="paciente/agendar.html" class="btn btn-primary" id="servicoCtaBtn">Agendar Consulta</a>
+      </div>
+
+      <div class="servico-hero-image">
+        <img id="servicoImagem" src="" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROFISSIONAIS DESTA ESPECIALIDADE ===================== -->
+<main class="servico-main">
+  <div class="container">
+    <h2 class="servico-section-title">Profissionais responsáveis</h2>
+    <p class="servico-section-sub" id="servicoSubProfissionais">Conheça quem vai te atender nesse serviço.</p>
+
+    <div class="servico-profissionais-grid" id="servicoProfissionaisGrid">
+      <p style="color:var(--alvea-text-muted); font-size:14px;">Carregando profissionais...</p>
+    </div>
+
+    <div class="servico-cta-band">
+      <div>
+        <h3>Pronto para agendar?</h3>
+        <p>Escolha o profissional, o horário e confirme em poucos passos.</p>
+      </div>
+      <a href="paciente/agendar.html" class="btn btn-primary">Agendar Consulta</a>
+    </div>
+  </div>
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html#home" class="logo">
+          <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="19" stroke="#FFFFFF" stroke-width="2"/>
+            <path d="M6 21h5l2.5-7 4 14 3-9 2 3h11.5" stroke="#8FE0CE" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          Clínica Alvea
+        </a>
+        <p>Tecnologia que respira cuidado. Soluções digitais para uma saúde mais acessível.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Horário de atendimento</h4>
+        <div class="footer-col-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          <span>Seg – Sex: 7h às 19h<br>Sáb: 8h às 13h</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <div class="footer-col-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.68 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0122 16.92z"/></svg>
+          <span>(11) 4000-1234</span>
+        </div>
+        <div class="footer-col-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4V4z"/><path d="M4 6l8 7 8-7"/></svg>
+          <span>contato@clinicaalvea.com.br</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Endereço</h4>
+        <div class="footer-col-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Av. das Nações, 1200<br>São Paulo, SP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Clínica Alvea. Todos os direitos reservados.</span>
+      <span>Projeto acadêmico — Sistema de Agendamento para Clínica de Saúde</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const ALVEA_SERVICO_API_BASE_URL = window.ALVEA_API_BASE_URL;
+
+  const CATALOGO_SERVICOS = {
+    medico: {
+      titulo: 'Atendimento médico',
+      descricao: 'Consultas com clínicos gerais e especialistas, com horários flexíveis e escolha do profissional. Você marca, é atendido e acompanha tudo pela sua área do paciente — sem burocracia e sem filas de espera no telefone.',
+      especialidades: ['Clínico Geral', 'Cardiologia'],
+      icone: '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 3v7.5a4.5 4.5 0 009 0V3M9 3H3.5M13.5 3H8"/><path d="M13.5 8.5v3a5.5 5.5 0 01-11 0v-1.3"/><circle cx="19" cy="8.5" r="2.5"/><path d="M19 11v2a6 6 0 01-6 6"/></svg>',
+      imagem: 'img/atendimento_medico.jpeg',
+    },
+    exames: {
+      titulo: 'Exames laboratoriais e de imagem',
+      descricao: 'Realize exames de rotina ou de imagem com nossa equipe especializada e acompanhe os resultados diretamente na sua área do paciente, assim que forem liberados pela clínica — com laudo e, quando disponível, arquivo para download.',
+      especialidades: ['Exames Laboratoriais', 'Exames de Imagem'],
+      icone: '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6L4 20a1 1 0 001 1h14a1 1 0 001-1L15 8V2M9 2h6M9 14h6"/></svg>',
+      imagem: 'img/exames_laboratoriais.jpeg',
+      cta: 'Agendar Exame',
+    },
+    nutricao: {
+      titulo: 'Aconselhamento nutricional',
+      descricao: 'Acompanhamento com nutricionistas para construir hábitos alimentares sustentáveis, no seu ritmo — seja para emagrecimento, performance esportiva ou apenas uma relação mais saudável com a comida.',
+      especialidades: ['Nutrição'],
+      icone: '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4c-8 0-15 5-15 13a1 1 0 001 1c8 0 13-7 13-13a1 1 0 00-1-1z"/><path d="M6 18c2-3 5-8 12-13"/></svg>',
+      imagem: 'img/aconselhamento_nutricional.jpeg',
+    },
+    outros: {
+      titulo: 'Outros procedimentos',
+      descricao: 'Medicina do trabalho, fisioterapia, vacinação, curativos e demais cuidados de saúde realizados por nossa equipe especializada — tudo agendável pela mesma plataforma, com a mesma facilidade.',
+      especialidades: ['Medicina do Trabalho', 'Fisioterapia'],
+      icone: '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>',
+      imagem: 'img/outros_procedimentos.jpeg',
+    },
+  };
+
+  function iniciaisDe(nome) {
+    return nome.split(' ').filter(Boolean).slice(0, 2).map((p) => p[0].toUpperCase()).join('');
+  }
+
+  function slugNome(nome) {
+    return nome
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .toLowerCase()
+      .replace(/\./g, '')
+      .trim()
+      .replace(/\s+/g, '_');
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const tipo = params.get('tipo');
+  const servico = CATALOGO_SERVICOS[tipo] || CATALOGO_SERVICOS.medico;
+
+  document.getElementById('pageTitle').textContent = `${servico.titulo} — Clínica Alvea`;
+  document.getElementById('servicoTitulo').textContent = servico.titulo;
+  document.getElementById('servicoDescricao').textContent = servico.descricao;
+  document.getElementById('servicoIcone').innerHTML = servico.icone;
+  document.getElementById('servicoImagem').src = servico.imagem;
+  document.getElementById('servicoImagem').alt = servico.titulo;
+  document.getElementById('servicoCtaBtn').textContent = servico.cta || 'Agendar Consulta';
+  document.getElementById('servicoSubProfissionais').textContent =
+    `Profissionais disponíveis para ${servico.especialidades.join(' e ')}.`;
+
+  fetch(`${ALVEA_SERVICO_API_BASE_URL}/profissionais`)
+    .then((res) => res.json())
+    .then((todosProfissionais) => {
+      const grid = document.getElementById('servicoProfissionaisGrid');
+      const filtrados = todosProfissionais.filter((p) => servico.especialidades.includes(p.especialidade));
+
+      if (!filtrados.length) {
+        grid.innerHTML = '<div class="servico-empty" style="grid-column:1/-1;">Nenhum profissional disponível para este serviço no momento.</div>';
+        return;
+      }
+
+      grid.innerHTML = filtrados.map((prof) => `
+        <div class="servico-prof-card">
+          <img class="avatar-photo" src="img/retratos_medicos/${slugNome(prof.nome)}.jpeg" alt="${prof.nome}">
+          <div class="prof-nome">${prof.nome}</div>
+          <div class="prof-esp">${prof.especialidade}</div>
+        </div>
+      `).join('');
+
+      grid.querySelectorAll('.avatar-photo').forEach((img) => {
+        img.addEventListener('error', () => {
+          const circle = document.createElement('div');
+          circle.className = 'avatar-circle';
+          circle.textContent = iniciaisDe(img.alt);
+          img.replaceWith(circle);
+        }, { once: true });
+      });
+    })
+    .catch(() => {
+      document.getElementById('servicoProfissionaisGrid').innerHTML =
+        '<div class="servico-empty" style="grid-column:1/-1;">Não foi possível carregar os profissionais. Verifique se o servidor está rodando.</div>';
+    });
+</script>
+</body>
+</html>
