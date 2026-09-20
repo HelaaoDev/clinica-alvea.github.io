@@ -18,7 +18,5 @@ window.ALVEA_API_BASE_URL = (function () {
     return "http://localhost:3000";
   }
 
-  // ⚠️ TROQUE a linha abaixo pela URL real do backend publicado
-  // (ex: o endereço gerado pelo Render, Railway, etc.) antes de ir ao ar.
-  return "https://SEU-BACKEND-AQUI.onrender.com";
+  return "https://clinica-alvea-github-io.onrender.com";
 })();
